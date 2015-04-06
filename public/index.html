@@ -1,0 +1,48 @@
+<html>
+<head>
+    <title>POC</title>
+    <link rel="stylesheet" href="css/app.css"/>
+</head>
+<body>
+
+<div class="module accounts grid-vew"></div>
+
+<script id="account-list" type="text/template">
+    <div class="container">
+        <h3>Accounts</h3>
+        <div class="btn-group btn-group-sm">
+            <button type="button" data-view="grid" class="btn btn-default">
+                <span class="glyphicon glyphicon-th"></span>
+            </button>
+            <button type="button" data-view="list" class="btn btn-default">
+                <span class="glyphicon glyphicon-th-list"></span>
+            </button>
+        </div>
+    </div>
+    <div class="container">
+        <ul></ul>
+    </div>
+</script>
+
+<script id="account-item-grid" type="text/template">
+    <div class="title"><%- accountName %></div>
+    <div class="allocation">
+        <span class="title">Today's total value</span>
+        <span class="value"><%- allocationValue %></span>
+    </div>
+    <div class="chart"></div>
+</script>
+
+<script id="account-item-list" type="text/template">
+    <div class="title"><%- accountName %></div>
+    <div class="chart"></div>
+    <div class="allocation">
+        <span class="value"><%- allocationValue %></span>
+        <span class="percentage"><%- allocationPercentage %></span>
+    </div>
+</script>
+
+<script src="js/vendor.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
