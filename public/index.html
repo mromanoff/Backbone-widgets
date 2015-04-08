@@ -28,7 +28,7 @@
     <div class="title"><%- accountName %></div>
     <div class="allocation">
         <span class="title">Today's total value</span>
-        <span class="value"><%- allocationValue %></span>
+        <span class="value"><%- currencySymbol %> <%- allocationValue %></span>
     </div>
     <div class="chart"></div>
 </script>
@@ -37,8 +37,8 @@
     <div class="title"><%- accountName %></div>
     <div class="chart"></div>
     <div class="allocation">
-        <span class="value"><%- allocationValue %></span>
-        <span class="percentage"><%- allocationPercentage %></span>
+        <span class="value"><%- currencySymbol %> <%- allocationValue %></span>
+        <span class="percentage">% <%- allocationPercentage %></span>
     </div>
 </script>
 

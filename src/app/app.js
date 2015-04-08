@@ -17,7 +17,7 @@
 
     App.Collections.Accounts = Backbone.Collection.extend({
         model: App.Models.Account,
-        url: '/mocks/accounts.json',
+        url: '/api/accounts',
 
         initialize: function () {
             console.log('collection', this.url);
