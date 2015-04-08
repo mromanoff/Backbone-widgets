@@ -7,9 +7,9 @@ var collection = new Backbone.Collection();
 
 // Returns a random number between min (inclusive) and max (exclusive)
 function getRandomArbitrary(min, max) {
+    'use strict';
     return (Math.random() * (max - min) + min).toFixed(2);
 }
-
 
 for (var i = 0; i < 12; i++) {
     collection.add({
@@ -17,7 +17,7 @@ for (var i = 0; i < 12; i++) {
         accountName: faker.name.findName(),
         allocationValue: faker.finance.amount(),
         currencySymbol: faker.finance.currencySymbol(),
-        allocationPercentage: getRandomArbitrary(faker.random.number(), faker.random.number())
+        allocationPercentage: getRandomArbitrary(-1, 1)
     });
 }
 
