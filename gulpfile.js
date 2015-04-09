@@ -11,6 +11,7 @@ var rename = require('gulp-rename');
 var watch = require('gulp-watch');
 var util = require('util');
 var del = require('del');
+var plumber = require('gulp-plumber');
 //var minifyCss = require('gulp-minify-css');
 
 
@@ -44,6 +45,20 @@ gulp.task('clean', function(cb) {
         'public/css'
     ], cb);
 });
+
+gulp.task('html', function() {
+    return gulp.src('./src/index.html')
+        .pipe(plumber())
+        .pipe(gulp.dest('./public'));
+});
+
+
+gulp.task('fonts', function() {
+    return gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*')
+        .pipe(plumber())
+        .pipe(gulp.dest('./public/fonts/bootstrap/'));
+});
+
 
 gulp.task('styles', function () {
     gulp.src('./src/main.scss')
@@ -157,7 +172,9 @@ gulp.task('build', [
     'clean',
    // 'lint',
     'scripts',
-    'styles'
+    'styles',
+    'fonts',
+    'html'
 ]);
 
 gulp.task('default', ['watch']);
