@@ -1,3 +1,5 @@
+'use strict';
+
 var Model = require('../common/model');
 
 module.exports = Model.extend({

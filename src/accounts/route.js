@@ -1,4 +1,5 @@
-//var _ = require('underscore');
+'use strict';
+
 var Route = require('../common/route');
 var Collection = require('./collection');
 var View = require('./composite-view');

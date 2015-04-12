@@ -1,107 +1,140 @@
-h3 {
-  margin: 0;
-  float: left;
+.accounts {
+  h3 {
+    margin: 0;
+    float: left;
+  }
+
+  .btn-group {
+    float: right;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .container {
+    margin-bottom: 20px;
+  }
+
 }
 
-.btn-group {
-  float: right;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.container {
-  margin-bottom: 20px;
-}
+$block: 'account';
 
 .account {
-  .title {
+  &__title {
     color: dodgerblue;
   }
 
-  .chart {
+  &__chart {
     height: 14px;
     background-color: dimgrey;
   }
-}
 
-.grid-view {
-
-  .account {
+  &--grid-view {
     background-color: #f8f8f8;
     border: 1px solid #e7e7e7;
     display: block;
     float: left;
-    width: 31.333%;
-    margin: 0 1.3% 1.3% 0;
+    width: 24%;
+    margin: 0 1% 1% 0;
 
-    &:nth-child(3n) {
-      padding-right: 0;
+    &:nth-child(4n+5) {
+      clear: both;
     }
 
-    .title {
+    &:nth-child(4n) {
+      margin-right: 0;
+    }
+
+    .#{$block}__title {
       padding: 10px;
     }
-  }
 
-  .allocation {
-    border-top: 1px solid #e7e7e7;
-    padding: 20px 0 30px;
-
-    .title {
-      color: #999;
-      font-size: 12px;
-      margin: 0;
-      padding-bottom: 0;
-      display: block;
+    .#{$block}__chart {
+      height: 14px;
+      margin: 10px;
     }
 
-    .value {
-      font-size: 30px;
-      padding: 10px;
-      margin-bottom: 30px;
+    .#{$block}__allocation {
+      border-top: 1px solid #e7e7e7;
+      padding: 20px 0 30px;
+
+      .title {
+        color: #999;
+        font-size: 12px;
+        margin: 0;
+        padding: 10px 10px 0;
+        display: block;
+      }
+
+      .value {
+        font-size: 30px;
+        padding: 10px;
+        margin-bottom: 30px;
+      }
     }
+
   }
 
-  .chart {
-    height: 14px;
-    margin: 10px;
-  }
-}
-
-// list view
-.list-view {
-
-  .account{
+  &--list-view {
     width: 100%;
     height: 60px;
     line-height: 60px;
     border-bottom: 1px solid #e7e7e7;
 
-    .title {
+    .#{$block}__title {
       font-size: 18px;
       padding-left: 10px;
       width: 40%;
       display: inline-block;
     }
 
-    .allocation {
+    .#{$block}__chart {
+      display: inline-block;
+      width: 16%;
+    }
+
+    .#{$block}__allocation {
       float: right;
       width: 40%;
       height: 60px;
       text-align: right;
-    }
-
-    .value {
-      font-size: 26px;
-      padding: 0 10px;
+      .value {
+        font-size: 26px;
+        padding: 0 10px;
+      }
     }
 
   }
-  .chart {
-    display: inline-block;
-    width: 16%;
-  }
+
 }
+
+// list view
+//.list-view {
+//
+//  .account {
+//    width: 100%;
+//    height: 60px;
+//    line-height: 60px;
+//    border-bottom: 1px solid #e7e7e7;
+//
+//    .title {
+//      font-size: 18px;
+//      padding-left: 10px;
+//      width: 40%;
+//      display: inline-block;
+//    }
+//
+//    .allocation {
+//      float: right;
+//      width: 40%;
+//      height: 60px;
+//      text-align: right;
+//    }
+//
+
+//
+//  }
+
+//}

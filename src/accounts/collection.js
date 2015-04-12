@@ -1,3 +1,5 @@
+'use strict';
+
 var Collection = require('../common/collection');
 var Model = require('./model');
 
@@ -10,7 +12,7 @@ module.exports = Collection.extend({
     },
 
     parse: function (response) {
-        //return response.allAccounts.subAccounts;
         return response;
     }
 });
+

@@ -1,3 +1,5 @@
+'use strict';
+
 var LayoutView = require('../common/layout-view');
 var template = require('./layout-template.hbs');
 
@@ -6,9 +8,9 @@ module.exports = LayoutView.extend({
     template: template,
 
     regions: {
-        header  : '.application__header',
-        flashes : '.application__flashes',
-        content : '.application__content',
-        overlay : '.application__overlay'
+        header: '.application__header',
+        flashes: '.application__flashes',
+        content: '.application__content',
+        overlay: '.application__overlay'
     }
 });

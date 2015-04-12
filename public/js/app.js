@@ -14,7 +14,7 @@ app.module('accounts', {
 
 Backbone.history.start();
 
-},{"./accounts/module":27,"./application/application":30,"./plugins":42,"backbone":8}],2:[function(require,module,exports){
+},{"./accounts/module":29,"./application/application":32,"./plugins":44,"backbone":8}],2:[function(require,module,exports){
 // MarionetteJS (Backbone.Marionette)
 // ----------------------------------
 // v2.4.1
@@ -30069,6 +30069,8 @@ return jQuery;
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{}],21:[function(require,module,exports){
+'use strict';
+
 var Collection = require('../common/collection');
 var Model = require('./model');
 
@@ -30081,11 +30083,12 @@ module.exports = Collection.extend({
     },
 
     parse: function (response) {
-        //return response.allAccounts.subAccounts;
         return response;
     }
 });
-},{"../common/collection":34,"./model":26}],22:[function(require,module,exports){
+
+
+},{"../common/collection":36,"./model":28}],22:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -30093,79 +30096,91 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
 },"useData":true});
 
 },{"hbsfy/runtime":18}],23:[function(require,module,exports){
+'use strict';
+
 var $ = require('jquery');
 var CompositeView = require('../common/composite-view');
-var ItemView = require('./item-view');
+var ItemGridView = require('./item-grid-view');
+var ItemListView = require('./item-list-view');
 var template = require('./composite-template.hbs');
 
 module.exports = CompositeView.extend({
-
+    className: 'accounts',
     template: template,
-    className: 'accounts container grid-view',
     events: {
         'click button': 'toggleView'
     },
 
-    initialize: function () {
-        //this.collection = new App.Collections.Accounts();
-        //this.collection.on('reset', this.render, this);
-        //this.collection.fetch({reset: true});
-    },
-
-    childView: ItemView,
     childViewContainer: 'ul',
 
-    collectionEvents: {
-        'change': 'render'
+    getChildView: function () {
+        return (this.layout === 'list') ? ItemListView : ItemGridView;
     },
 
     toggleView: function (e) {
         e.preventDefault();
         this.layout = $(e.currentTarget).data('view');
-        this.$el.toggleClass('list-view grid-view');
-        this.$el.find('ul').empty();
         this.render();
     }
 });
-},{"../common/composite-view":35,"./composite-template.hbs":22,"./item-view":25,"jquery":19}],24:[function(require,module,exports){
+
+},{"../common/composite-view":37,"./composite-template.hbs":22,"./item-grid-view":25,"./item-list-view":27,"jquery":19}],24:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
-  return "<div class=\"title\">"
+  return "<div class=\"account__title\">"
     + alias3(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"accountName","hash":{},"data":data}) : helper)))
-    + "</div>\n<div class=\"allocation\">\n    <span class=\"title\">Today's total value</span>\n    <span class=\"value\">"
+    + "</div>\n<div class=\"account__allocation\">\n    <span class=\"title\">Today's total value</span>\n    <span class=\"value\">"
     + alias3(((helper = (helper = helpers.currencySymbol || (depth0 != null ? depth0.currencySymbol : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"currencySymbol","hash":{},"data":data}) : helper)))
     + " "
     + alias3(((helper = (helper = helpers.allocationValue || (depth0 != null ? depth0.allocationValue : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationValue","hash":{},"data":data}) : helper)))
-    + "</span>\n</div>\n<div class=\"chart\"></div>";
+    + "</span>\n</div>\n<div class=\"account__chart\"></div>";
 },"useData":true});
 
 },{"hbsfy/runtime":18}],25:[function(require,module,exports){
+'use strict';
+
 var ItemView = require('../common/item-view');
-var template = require('./item-template.hbs');
+var template = require('./item-grid-template.hbs');
 
 module.exports = ItemView.extend({
     tagName: 'li',
     template: template,
-    className: 'account account__item',
-
-    initialize: function (options) {
-        this.layout = options.layout;
-    },
-
-    attributes: function () {
-        return {
-            href: '#colors/' + this.model.get('id')
-        };
-    },
-
-    modelEvents: {
-        'all': 'render'
-    }
+    className: 'account account--grid-view'
 });
-},{"../common/item-view":36,"./item-template.hbs":24}],26:[function(require,module,exports){
+
+},{"../common/item-view":38,"./item-grid-template.hbs":24}],26:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var HandlebarsCompiler = require('hbsfy/runtime');
+module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+
+  return "<div class=\"account__title\">"
+    + alias3(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"accountName","hash":{},"data":data}) : helper)))
+    + "</div>\n<div class=\"account__chart\"></div>\n<div class=\"account__allocation\">\n    <span class=\"value\">"
+    + alias3(((helper = (helper = helpers.allocationValue || (depth0 != null ? depth0.allocationValue : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationValue","hash":{},"data":data}) : helper)))
+    + "</span>\n    <span class=\"percentage\">"
+    + alias3(((helper = (helper = helpers.allocationPercentage || (depth0 != null ? depth0.allocationPercentage : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationPercentage","hash":{},"data":data}) : helper)))
+    + "</span>\n</div>";
+},"useData":true});
+
+},{"hbsfy/runtime":18}],27:[function(require,module,exports){
+'use strict';
+
+var ItemView = require('../common/item-view');
+var template = require('./item-list-template.hbs');
+
+module.exports = ItemView.extend({
+    tagName: 'li',
+    template: template,
+    className: 'account account--list-view'
+});
+
+},{"../common/item-view":38,"./item-list-template.hbs":26}],28:[function(require,module,exports){
+'use strict';
+
 var Model = require('../common/model');
 
 module.exports = Model.extend({
@@ -30179,10 +30194,12 @@ module.exports = Model.extend({
         return this.collection.active === this;
     }
 });
-},{"../common/model":38}],27:[function(require,module,exports){
+
+},{"../common/model":40}],29:[function(require,module,exports){
+'use strict';
+
 var Radio = require('backbone.radio');
 var Module = require('../common/module');
-
 var Router = require('./router');
 
 module.exports = Module.extend({
@@ -30197,8 +30214,9 @@ module.exports = Module.extend({
     }
 });
 
-},{"../common/module":39,"./router":29,"backbone.radio":6}],28:[function(require,module,exports){
-//var _ = require('underscore');
+},{"../common/module":41,"./router":31,"backbone.radio":6}],30:[function(require,module,exports){
+'use strict';
+
 var Route = require('../common/route');
 var Collection = require('./collection');
 var View = require('./composite-view');
@@ -30220,20 +30238,12 @@ module.exports = Route.extend({
         this.container.show(this.view);
     }
 });
-},{"../common/route":40,"./collection":21,"./composite-view":23}],29:[function(require,module,exports){
-//var Backbone = require('backbone');
-//var _ = require('lodash');
-//var $ = require('jquery');
 
+},{"../common/route":42,"./collection":21,"./composite-view":23}],31:[function(require,module,exports){
+'use strict';
 
 var Router = require('../common/router');
-//var Radio = require('backbone.radio');
-
 var IndexRoute = require('./route');
-
-
-console.log('accounts module');
-
 
 module.exports = Router.extend({
     initialize: function (options) {
@@ -30250,125 +30260,8 @@ module.exports = Router.extend({
         });
     }
 });
-
-
-//module.exports = Route.extend({
-//    initialize: function(options) {
-//        this.container = options.container;
-//    },
-//
-//    fetch: function() {
-//        this.collection = new Collection();
-//        return this.collection.fetch();
-//    },
-//
-//    render: function() {
-//        this.view = new View({
-//            collection: this.collection
-//        });
-//        this.container.show(this.view);
-//    }
-//});
-
-
-//var IndexRoute = require('./index/route');
-//var ShowRoute = require('./show/route');
-
-//var App = {
-//    Models: {},
-//    Collections: {},
-//    Views: {}
-//};
-
-//App.Models.Account = Backbone.Model.extend({
-//    defaults: {
-//        accountName: null,
-//        allocationValue: null,
-//        allocationPercentage: null
-//    }
-//});
-
-//App.Collections.Accounts = Backbone.Collection.extend({
-//    model: App.Models.Account,
-//    url: '/api/accounts',
-//
-//    initialize: function () {
-//        console.log('collection', this.url);
-//    },
-//
-//    parse: function (response) {
-//        //return response.allAccounts.subAccounts;
-//        return response;
-//    }
-//});
-
-//App.Views.Account = Backbone.View.extend({
-//    tagName: 'li',
-//    className: 'account',
-//    initialize: function (options) {
-//        this.layout = options.layout;
-//    },
-//
-//    templateList: _.template($('#account-item-list').html()),
-//    templateGrid: _.template($('#account-item-grid').html()),
-//    render: function () {
-//        if (_.isEqual(this.layout, 'list')) {
-//            this.$el.html(this.templateList(this.model.toJSON()));
-//        } else {
-//            this.$el.html(this.templateGrid(this.model.toJSON()));
-//        }
-//        return this;
-//    }
-//});
-
-//App.Views.Accounts = Backbone.View.extend({
-//    el: '.accounts',
-//    events: {
-//        'click button': 'toggleView'
-//    },
-//
-//    initialize: function () {
-//        this.collection = new App.Collections.Accounts();
-//        this.collection.on('reset', this.render, this);
-//        this.collection.fetch({reset: true});
-//    },
-//
-//    template: _.template($('#account-list').html()),
-//
-//    toggleView: function (e) {
-//        e.preventDefault();
-//        this.layout = $(e.currentTarget).data('view');
-//        this.$el.toggleClass('list-view grid-view');
-//        this.$el.find('ul').empty();
-//        this.render();
-//    },
-//
-//    render: function () {
-//        var html = [];
-//        this.$el.html(this.template());
-//        this.collection.each(function (model) {
-//            var account = new App.Views.Account({
-//                model: model,
-//                layout: this.layout
-//            });
-//            html.push(account.render().el);
-//        }, this);
-//
-//        this.$el.find('ul').append(html);
-//        return this;
-//    }
-//});
-
-// kick the app
-//var app = new App.Views.Accounts();
-
-//module.exports = App.Views.Accounts;
-
-
-},{"../common/router":41,"./route":28}],30:[function(require,module,exports){
-//var  $ = require('jquery');
-//var  _ = require('lodash');
-//var Radio = require('backbone.radio');
+},{"../common/router":43,"./route":30}],32:[function(require,module,exports){
+'use strict';
 
 var Application = require('../common/application');
 var LayoutView = require('./layout-view');
@@ -30380,59 +30273,16 @@ module.exports = Application.extend({
     }
 });
 
-
-//import nprogress from 'nprogress';
-//import Application from '../common/application';
-//import LayoutView from './layout-view';
-//
-//let routerChannel = Radio.channel('router');
-//
-//nprogress.configure({
-//    showSpinner: false
-//});
-//
-//export default Application.extend({
-//    initialize() {
-//    this.$body = $(document.body);
-//    this.layout = new LayoutView();
-//    this.layout.render();
-//
-//    this.listenTo(routerChannel, {
-//        'before:enter:route' : this.onBeforeEnterRoute,
-//        'enter:route'        : this.onEnterRoute,
-//        'error:route'        : this.onErrorRoute
-//    });
-//},
-//
-//onBeforeEnterRoute() {
-//    this.transitioning = true;
-//    // Don't show for synchronous route changes
-//    _.defer(() => {
-//        if (this.transitioning) {
-//        nprogress.start();
-//    }
-//});
-//},
-//
-//onEnterRoute() {
-//    this.transitioning = false;
-//    this.$body.scrollTop(0);
-//    nprogress.done();
-//},
-//
-//onErrorRoute() {
-//    this.transitioning = false;
-//    nprogress.done(true);
-//}
-//});
-},{"../common/application":33,"./layout-view":32}],31:[function(require,module,exports){
+},{"../common/application":35,"./layout-view":34}],33:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<div class=\"application__header\"></div>\n<div class=\"application__flashes\"></div>\n<main class=\"application__content\" role=\"main\"></main>\n<div class=\"application__overlay\"></div>";
 },"useData":true});
 
-},{"hbsfy/runtime":18}],32:[function(require,module,exports){
+},{"hbsfy/runtime":18}],34:[function(require,module,exports){
+'use strict';
+
 var LayoutView = require('../common/layout-view');
 var template = require('./layout-template.hbs');
 
@@ -30441,13 +30291,14 @@ module.exports = LayoutView.extend({
     template: template,
 
     regions: {
-        header  : '.application__header',
-        flashes : '.application__flashes',
-        content : '.application__content',
-        overlay : '.application__overlay'
+        header: '.application__header',
+        flashes: '.application__flashes',
+        content: '.application__content',
+        overlay: '.application__overlay'
     }
 });
-},{"../common/layout-view":37,"./layout-template.hbs":31}],33:[function(require,module,exports){
+
+},{"../common/layout-view":39,"./layout-template.hbs":33}],35:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.Application.extend({
@@ -30458,7 +30309,7 @@ module.exports = Marionette.Application.extend({
         this.initialize.apply(this, arguments);
     }
 });
-},{"backbone.marionette":2}],34:[function(require,module,exports){
+},{"backbone.marionette":2}],36:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.Collection.extend({
@@ -30474,19 +30325,19 @@ module.exports = Backbone.Collection.extend({
         return this._isNew;
     }
 });
-},{"backbone":8}],35:[function(require,module,exports){
+},{"backbone":8}],37:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.CompositeView;
-},{"backbone.marionette":2}],36:[function(require,module,exports){
+},{"backbone.marionette":2}],38:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.ItemView;
-},{"backbone.marionette":2}],37:[function(require,module,exports){
+},{"backbone.marionette":2}],39:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.LayoutView;
-},{"backbone.marionette":2}],38:[function(require,module,exports){
+},{"backbone.marionette":2}],40:[function(require,module,exports){
 var Backbone = require('backbone');
 var Radio = require('backbone.radio');
 
@@ -30518,7 +30369,7 @@ module.exports = Backbone.Model.extend({
     }
 });
 
-},{"backbone":8,"backbone.radio":6}],39:[function(require,module,exports){
+},{"backbone":8,"backbone.radio":6}],41:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 
@@ -30543,7 +30394,7 @@ module.exports = Marionette.Module.extend({
     }
 });
 
-},{"backbone":8,"backbone.marionette":2}],40:[function(require,module,exports){
+},{"backbone":8,"backbone.marionette":2}],42:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -30580,7 +30431,7 @@ module.exports = Marionette.Object.extend({
     fetch  : function() {},
     render : function() {}
 });
-},{"backbone":8,"backbone.marionette":2,"jquery":19}],41:[function(require,module,exports){
+},{"backbone":8,"backbone.marionette":2,"jquery":19}],43:[function(require,module,exports){
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -30628,7 +30479,7 @@ module.exports = Marionette.AppRouter.extend({
 
     triggerMethod: Marionette.triggerMethod
 });
-},{"./route":40,"backbone":8,"backbone.marionette":2,"jquery":19}],42:[function(require,module,exports){
+},{"./route":42,"backbone":8,"backbone.marionette":2,"jquery":19}],44:[function(require,module,exports){
 var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 var Marionette = require('backbone.marionette');
