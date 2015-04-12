@@ -1,20 +1,15 @@
+'use strict';
+
 var gulp = require('gulp');
-//var clean = require('gulp-clean');
-//var concat = require('gulp-concat');
-//var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
-//var path = require('path');
 var rename = require('gulp-rename');
 var watch = require('gulp-watch');
 var util = require('util');
 var del = require('del');
 var plumber = require('gulp-plumber');
-//var minifyCss = require('gulp-minify-css');
-
-
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
@@ -34,24 +29,12 @@ var paths = {
 
 var reporter = 'spec';
 
-//gulp.task('clean', function () {
-//    return gulp.src('public/js', {read: false})
-//        .pipe(clean());
-//});
-
 gulp.task('clean', function(cb) {
     del([
         'public/js',
         'public/css'
     ], cb);
 });
-
-gulp.task('html', function() {
-    return gulp.src('./src/index.html')
-        .pipe(plumber())
-        .pipe(gulp.dest('./public'));
-});
-
 
 gulp.task('fonts', function() {
     return gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*')
@@ -67,24 +50,6 @@ gulp.task('styles', function () {
         .pipe(rename('app.css'))
         .pipe(gulp.dest('./public/css'));
 });
-
-//gulp.task('scripts', ['clean'], function() {
-//    // Minify and copy all JavaScript (except vendor scripts)
-//    // with sourcemaps all the way down
-//    gulp.src(paths.scripts)
-//        .pipe(sourcemaps.init())
-//         .pipe(uglify())
-//         .pipe(concat('app.js'))
-//        .pipe(sourcemaps.write())
-//        .pipe(gulp.dest('public/js'));
-//
-//    // create 1 vendor.js file from all vendor plugin code
-//    gulp.src(paths.vendor)
-//        .pipe(uglify())
-//        .pipe(concat('vendor.js'))
-//        .pipe(gulp.dest('public/js'));
-//});
-
 
 var bundler = _.memoize(function(watch) {
     var options = {debug: true};
@@ -111,8 +76,6 @@ function bundle(cb, watch) {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./public/js'))
         .on('end', cb);
-
-        //.pipe(reload({ stream: true }));
 }
 
 gulp.task('scripts', function(cb) {
@@ -130,30 +93,7 @@ gulp.task('lint', function () {
         .pipe(eslint.failOnError());
 });
 
-//gulp.task('watch', function () {
-//    gulp.src('src/**/*.js')
-//        .pipe(watch('src/**/*.js'))
-//        .pipe(gulp.dest('public/js'));
-//});
-
-
-// Rerun the task when a file changes
-//gulp.task('watch', function() {
-//    gulp.watch(paths.scripts, ['lint', 'scripts']);
-//});
-//
-//gulp.watch(paths.styles, ['styles']);
-
-
 gulp.task('watch', ['build'], function(cb) {
-    //browserSync({
-    //    server: {
-    //        baseDir: 'dist',
-    //        middleware: function(req, res, next) {
-    //            api(req, res, next);
-    //        }
-    //    }
-    //});
 
     reporter = 'dot';
     bundler(true).on('update', function() {
@@ -173,8 +113,7 @@ gulp.task('build', [
    // 'lint',
     'scripts',
     'styles',
-    'fonts',
-    'html'
+    'fonts'
 ]);
 
 gulp.task('default', ['watch']);
