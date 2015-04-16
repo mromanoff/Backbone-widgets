@@ -1,7 +1,12 @@
+'use strict';
+
+var version = '__VERSION__';
+
+
 require('./plugins');
 var Backbone = require('backbone');
-var Application = require('./application/application');
 
+var Application = require('./application/application');
 
 var app = new Application();
 
