@@ -16,7 +16,7 @@ var buffer = require('vinyl-buffer');
 var exorcist = require('exorcist');
 var watchify = require('watchify');
 var _ = require('lodash');
-
+var karma = require('karma');
 
 var paths = {
     vendor: [
@@ -31,22 +31,20 @@ var paths = {
     styles: ['./src/main.scss', './src/**/*.scss']
 };
 
-
 var reporter = 'spec';
 
-gulp.task('clean', function(cb) {
+gulp.task('clean', function (cb) {
     del([
         'public/js/*',
         'public/css/*'
     ], cb);
 });
 
-gulp.task('fonts', function() {
+gulp.task('fonts', function () {
     return gulp.src('./node_modules/bootstrap-sass/assets/fonts/bootstrap/*')
         .pipe(plumber())
         .pipe(gulp.dest('./public/fonts/bootstrap/'));
 });
-
 
 gulp.task('styles', function () {
     gulp.src('./src/main.scss')
@@ -56,7 +54,7 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
-var bundler = _.memoize(function(watch) {
+var bundler = _.memoize(function (watch) {
     var options = {
         debug: true
     };
@@ -66,8 +64,8 @@ var bundler = _.memoize(function(watch) {
     }
 
     var b = browserify(options)
-            .add('./src/main.js')
-            .external(paths.vendor);
+        .add('./src/main.js')
+        .external(paths.vendor);
 
     if (watch) {
         b = watchify(b);
@@ -89,13 +87,12 @@ function bundle(cb, watch) {
         .on('end', cb);
 }
 
-gulp.task('scripts', function(cb) {
+gulp.task('scripts', function (cb) {
     process.env.BROWSERIFYSWAP_ENV = 'dist';
     bundle(cb, true);
 });
 
-
-var bundlerVendor = _.memoize(function(watch) {
+var bundlerVendor = _.memoize(function (watch) {
     var options = {
         debug: true
     };
@@ -105,7 +102,7 @@ var bundlerVendor = _.memoize(function(watch) {
     }
 
     var b = browserify(options)
-            .require(paths.vendor);
+        .require(paths.vendor);
 
     if (watch) {
         b = watchify(b);
@@ -127,7 +124,7 @@ function bundleVendor(cb, watch) {
         .on('end', cb);
 }
 
-gulp.task('vendor', function(cb) {
+gulp.task('vendor', function (cb) {
     process.env.BROWSERIFYSWAP_ENV = 'dist';
     bundleVendor(cb, true);
 });
@@ -141,11 +138,11 @@ gulp.task('lint', function () {
         .pipe(eslint.failOnError());
 });
 
-gulp.task('watch', ['build'], function(cb) {
+gulp.task('watch', ['build'], function (cb) {
 
     reporter = 'dot';
 
-    bundler(true).on('update', function() {
+    bundler(true).on('update', function () {
         gulp.start('scripts');
         //gulp.start('test');
     });
@@ -156,6 +153,18 @@ gulp.task('watch', ['build'], function(cb) {
 });
 
 
+gulp.task('watch-karma', function() {
+    return karma.server.start({
+        configFile: __dirname + '/karma.conf.js'
+    });
+});
+
+gulp.task('test', function () {
+    return karma.server.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    });
+});
 
 gulp.task('build', [
     'clean',
@@ -164,11 +173,6 @@ gulp.task('build', [
     'scripts',
     'styles',
     'fonts'
-]);
-
-gulp.task('test', [
-    'lint',
-    'mocha'
 ]);
 
 gulp.task('default', ['watch']);
