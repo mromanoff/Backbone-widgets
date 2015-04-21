@@ -1,7 +1,7 @@
 'use strict';
 
 var $ = require('jquery');
-var CompositeView = require('../common/composite-view');
+var CompositeView = require('../common/core/composite-view');
 var ItemGridView = require('./item-grid-view');
 var ItemListView = require('./item-list-view');
 var template = require('./composite-template.hbs');

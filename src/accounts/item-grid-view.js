@@ -1,6 +1,6 @@
 'use strict';
 
-var ItemView = require('../common/item-view');
+var ItemView = require('../common/core/item-view');
 var template = require('./item-grid-template.hbs');
 
 module.exports = ItemView.extend({

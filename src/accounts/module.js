@@ -1,7 +1,7 @@
 'use strict';
 
 var Radio = require('backbone.radio');
-var Module = require('../common/module');
+var Module = require('../common/core/module');
 var Router = require('./router');
 
 module.exports = Module.extend({

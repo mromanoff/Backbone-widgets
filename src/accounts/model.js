@@ -1,6 +1,6 @@
 'use strict';
 
-var Model = require('../common/model');
+var Model = require('../common/core/model');
 
 module.exports = Model.extend({
     defaults: {
