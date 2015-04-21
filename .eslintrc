@@ -32,13 +32,13 @@
     "space-after-keywords": [2, "always"],
     "space-in-brackets": [2, "never"],
     "space-unary-ops": 2,
+    "no-underscore-dangle": 1,
 
-    "backbone/model-defaults": 2,
-    "backbone/defaults-on-top": 2,
-    "backbone/collection-model": 2,
+    "backbone/model-defaults": 1,
+    "backbone/defaults-on-top": 1,
+    "backbone/collection-model": 1,
     "backbone/no-view-onoff-binding": 1,
-    "backbone/initialize-on-top": [1, { View: ["tagName", "className", "events"], Model: ["defaults", "url", "urlRoot"], Collection: ["model", "url"] }],
-
+    "backbone/initialize-on-top": [1, { "View": ["tagName", "className", "events"], "Model": ["defaults", "url", "urlRoot"], "Collection": ["model", "url"] }]
   },
 
   "plugins": [

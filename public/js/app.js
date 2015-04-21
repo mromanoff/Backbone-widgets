@@ -3,7 +3,6 @@
 
 var version = '0.0.1';
 
-
 require('./plugins');
 var Backbone = require('backbone');
 
@@ -212,6 +211,7 @@ module.exports = Router.extend({
         });
     }
 });
+
 },{"../common/core/router":25,"./route":11}],13:[function(require,module,exports){
 'use strict';
 
@@ -257,12 +257,13 @@ var API = {
     accounts: '/api/accounts'
 };
 
-
 module.exports = API;
 
 
 
 },{}],17:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.Application.extend({
@@ -273,7 +274,10 @@ module.exports = Marionette.Application.extend({
         this.initialize.apply(this, arguments);
     }
 });
+
 },{"backbone.marionette":"backbone.marionette"}],18:[function(require,module,exports){
+'use strict';
+
 var Backbone = require('backbone');
 
 module.exports = Backbone.Collection.extend({
@@ -289,19 +293,31 @@ module.exports = Backbone.Collection.extend({
         return this._isNew;
     }
 });
+
 },{"backbone":"backbone"}],19:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.CompositeView;
+
 },{"backbone.marionette":"backbone.marionette"}],20:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.ItemView;
+
 },{"backbone.marionette":"backbone.marionette"}],21:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 
 module.exports = Marionette.LayoutView;
+
 },{"backbone.marionette":"backbone.marionette"}],22:[function(require,module,exports){
+'use strict';
+
 var Backbone = require('backbone');
 var Radio = require('backbone.radio');
 
@@ -334,6 +350,8 @@ module.exports = Backbone.Model.extend({
 });
 
 },{"backbone":"backbone","backbone.radio":"backbone.radio"}],23:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 
@@ -359,43 +377,49 @@ module.exports = Marionette.Module.extend({
 });
 
 },{"backbone":"backbone","backbone.marionette":"backbone.marionette"}],24:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
 
-
 module.exports = Marionette.Object.extend({
-    constructor: function() {
+    constructor: function () {
         this.initialize.apply(this, arguments);
     },
 
-    enter: function(args) {
+    enter: function (args) {
         var self = this;
 
         this.triggerMethod.apply(this, ['before:enter'].concat(args));
         this.triggerMethod.apply(this, ['before:fetch'].concat(args));
 
-        return $.when(this.fetch.apply(this, args)).then(function() {
+        return $.when(this.fetch.apply(this, args)).then(function () {
             self.triggerMethod.apply(self, ['fetch'].concat(args));
             self.triggerMethod.apply(self, ['before:render'].concat(args));
-        }).then(function() {
+        }).then(function () {
             return self.render.apply(self, args);
-        }).then(function() {
+        }).then(function () {
             self.triggerMethod.apply(self, ['render'].concat(args));
             self.triggerMethod.apply(self, ['enter'].concat(args));
-        }).fail(function() {
+        }).fail(function () {
             self.triggerMethod.apply(self, ['error'].concat(args));
         });
     },
 
-    navigate: function() {
+    navigate: function () {
         Backbone.history.navigate.apply(Backbone.history, arguments);
     },
 
-    fetch  : function() {},
-    render : function() {}
+    fetch: function () {
+    },
+    render: function () {
+    }
 });
+
 },{"backbone":"backbone","backbone.marionette":"backbone.marionette","jquery":"jquery"}],25:[function(require,module,exports){
+'use strict';
+
 var Marionette = require('backbone.marionette');
 var Backbone = require('backbone');
 var $ = require('jquery');
@@ -443,6 +467,7 @@ module.exports = Marionette.AppRouter.extend({
 
     triggerMethod: Marionette.triggerMethod
 });
+
 },{"./route":24,"backbone":"backbone","backbone.marionette":"backbone.marionette","jquery":"jquery"}],26:[function(require,module,exports){
 'use strict';
 

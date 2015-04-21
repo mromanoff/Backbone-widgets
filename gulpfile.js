@@ -159,11 +159,16 @@ gulp.task('watch', ['build'], function(cb) {
 
 gulp.task('build', [
     'clean',
-   // 'lint',
+    'lint',
     'vendor',
     'scripts',
     'styles',
     'fonts'
+]);
+
+gulp.task('test', [
+    'lint',
+    'mocha'
 ]);
 
 gulp.task('default', ['watch']);

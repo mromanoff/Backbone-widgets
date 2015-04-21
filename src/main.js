@@ -2,7 +2,6 @@
 
 var version = '__VERSION__';
 
-
 require('./plugins');
 var Backbone = require('backbone');
 
