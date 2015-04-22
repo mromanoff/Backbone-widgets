@@ -38,7 +38,6 @@
     "gulp-concat": "^2.5.2",
     "gulp-eslint": "^0.8.0",
     "gulp-jshint": "^1.10.0",
-    "gulp-karma": "0.0.4",
     "gulp-minify-css": "^1.0.0",
     "gulp-plumber": "^1.0.0",
     "gulp-rename": "^1.2.2",
@@ -49,16 +48,10 @@
     "gulp-watch": "^4.2.3",
     "hbsfy": "^2.2.1",
     "jasmine-core": "^2.2.0",
-    "jasmine-spec-reporter": "^2.1.0",
     "karma": "^0.12.31",
-    "karma-as-promised": "^1.0.0",
     "karma-browserify": "^4.1.2",
-    "karma-chrome-launcher": "^0.1.8",
-    "karma-coverage": "^0.3.1",
-    "karma-failed-reporter": "0.0.3",
     "karma-jasmine": "^0.3.5",
     "karma-phantomjs-launcher": "^0.1.4",
-    "karma-spec-reporter": "0.0.19",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "vinyl-transform": "^1.0.0",
@@ -72,7 +65,8 @@
       "depends": [
         "jquery:jQuery"
       ]
-    }
+    },
+    "external": "global:External"
   },
   "browserify-swap": {
     "@packages": [

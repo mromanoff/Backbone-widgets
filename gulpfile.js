@@ -16,7 +16,7 @@ var buffer = require('vinyl-buffer');
 var exorcist = require('exorcist');
 var watchify = require('watchify');
 var _ = require('lodash');
-var karma = require('karma');
+//var karma = require('karma');
 
 var paths = {
     vendor: [
@@ -153,18 +153,18 @@ gulp.task('watch', ['build'], function (cb) {
 });
 
 
-gulp.task('watch-karma', function() {
-    return karma.server.start({
-        configFile: __dirname + '/karma.conf.js'
-    });
-});
-
-gulp.task('test', function () {
-    return karma.server.start({
-        configFile: __dirname + '/karma.conf.js',
-        singleRun: true
-    });
-});
+//gulp.task('watch-karma', function() {
+//    return karma.server.start({
+//        configFile: __dirname + '/karma.conf.js'
+//    });
+//});
+//
+//gulp.task('test', function () {
+//    return karma.server.start({
+//        configFile: __dirname + '/karma.conf.js',
+//        singleRun: true
+//    });
+//});
 
 gulp.task('build', [
     'clean',

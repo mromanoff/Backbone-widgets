@@ -14,5 +14,4 @@ app.module('accounts', {
     container: app.layout.content
 });
 
-
 Backbone.history.start();
