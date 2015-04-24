@@ -54,6 +54,13 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
+
+
+
+
+
+
+
 var bundler = _.memoize(function (watch) {
     var options = {
         debug: true
@@ -64,7 +71,7 @@ var bundler = _.memoize(function (watch) {
     }
 
     var b = browserify(options)
-        .add('./src/main.js')
+        .add('./src/accounts/main.js')
         .external(paths.vendor);
 
     if (watch) {
@@ -91,6 +98,103 @@ gulp.task('scripts', function (cb) {
     process.env.BROWSERIFYSWAP_ENV = 'dist';
     bundle(cb, true);
 });
+
+
+
+
+
+
+
+
+
+
+
+var bundlerWidget = _.memoize(function (watch) {
+    var options = {
+        debug: true
+    };
+
+    if (watch) {
+        _.extend(options, watchify.args);
+    }
+
+    var b = browserify(options)
+        .add('./src/widget/main.js')
+        .external(paths.vendor);
+
+    if (watch) {
+        b = watchify(b);
+    }
+
+    return b;
+});
+
+function bundleWidget(cb, watch) {
+    return bundlerWidget(watch)
+        .bundle()
+        .on('error', util.log)
+        .pipe(source('widget1.js'))
+        .pipe(buffer())
+        .pipe(transform(function () {
+            return exorcist('./public/js/widget1.js.map');
+        }))
+        .pipe(gulp.dest('./public/js'))
+        .on('end', cb);
+}
+
+gulp.task('widget1', function (cb) {
+    process.env.BROWSERIFYSWAP_ENV = 'dist';
+    bundleWidget(cb, true);
+});
+
+
+
+var bundlerWidget2 = _.memoize(function (watch) {
+    var options = {
+        debug: true
+    };
+
+    if (watch) {
+        _.extend(options, watchify.args);
+    }
+
+    var b = browserify(options)
+        .add('./src/widget2/main.js')
+        .external(paths.vendor);
+
+    if (watch) {
+        b = watchify(b);
+    }
+
+    return b;
+});
+
+function bundleWidget2(cb, watch) {
+    return bundlerWidget2(watch)
+        .bundle()
+        .on('error', util.log)
+        .pipe(source('widget2.js'))
+        .pipe(buffer())
+        .pipe(transform(function () {
+            return exorcist('./public/js/widget2.js.map');
+        }))
+        .pipe(gulp.dest('./public/js'))
+        .on('end', cb);
+}
+
+gulp.task('widget2', function (cb) {
+    process.env.BROWSERIFYSWAP_ENV = 'dist';
+    bundleWidget2(cb, true);
+});
+
+
+
+
+
+
+
+
+
 
 var bundlerVendor = _.memoize(function (watch) {
     var options = {
@@ -129,6 +233,11 @@ gulp.task('vendor', function (cb) {
     bundleVendor(cb, true);
 });
 
+
+
+
+
+
 gulp.task('lint', function () {
     // Note: To have the process exit with an error code (1) on
     //  lint error, return the stream and pipe to failOnError last.
@@ -143,7 +252,8 @@ gulp.task('watch', ['build'], function (cb) {
     reporter = 'dot';
 
     bundler(true).on('update', function () {
-        gulp.start('scripts');
+        //gulp.start('scripts');
+        gulp.start('widget1');
         //gulp.start('test');
     });
     gulp.watch(paths.styles, ['styles']);

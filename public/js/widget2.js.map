@@ -1,0 +1,19 @@
+{
+  "version": 3,
+  "sources": [
+    "node_modules/browserify/node_modules/browser-pack/_prelude.js",
+    "src/widget2/main.js",
+    "src/widget2/item-view.hbs",
+    "src/widget2/layout-template.hbs"
+  ],
+  "names": [],
+  "mappings": "AAAA;ACAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;ACjCA;AACA;AACA;AACA;AACA;AACA;;ACLA;AACA;AACA;AACA;AACA;AACA",
+  "file": "generated.js",
+  "sourceRoot": "",
+  "sourcesContent": [
+    "(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==\"function\"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error(\"Cannot find module '\"+o+\"'\");throw f.code=\"MODULE_NOT_FOUND\",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==\"function\"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})",
+    "'use strict';\n\nvar Backbone = require('backbone');\nBackbone.$ = require('jquery');\nvar Marionette = require('backbone.marionette');\n\n// start the marionette inspector\nif (window.__agent) {\n    window.__agent.start(Backbone, Marionette);\n}\n\n\nvar Widget = Marionette.Application.extend();\n\nvar widget = new Widget();\n\nvar WidgetLayout = Marionette.LayoutView.extend({\n    el: '.widget2',\n    template: require('./layout-template.hbs'),\n    regions: {\n        content: '.widget__content'\n    }\n});\n\nwidget.layout = new WidgetLayout();\nwidget.layout.render();\n\nvar myView = new Marionette.ItemView({\n    template: require('./item-view.hbs')\n});\nwidget.layout.content.show(myView);\n\nwidget.start();\n",
+    "// hbsfy compiled Handlebars template\nvar HandlebarsCompiler = require('hbsfy/runtime');\nmodule.exports = HandlebarsCompiler.template({\"compiler\":[6,\">= 2.0.0-beta.1\"],\"main\":function(depth0,helpers,partials,data) {\n    return \"<h1>test widget 2</h1>\";\n},\"useData\":true});\n",
+    "// hbsfy compiled Handlebars template\nvar HandlebarsCompiler = require('hbsfy/runtime');\nmodule.exports = HandlebarsCompiler.template({\"compiler\":[6,\">= 2.0.0-beta.1\"],\"main\":function(depth0,helpers,partials,data) {\n    return \"<main class=\\\"widget__content\\\" role=\\\"main\\\"></main>\";\n},\"useData\":true});\n"
+  ]
+}

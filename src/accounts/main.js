@@ -10,7 +10,7 @@ var Application = require('./application/application');
 var app = new Application();
 
 app.module('accounts', {
-    moduleClass: require('./accounts/module'),
+    moduleClass: require('./index/module'),
     container: app.layout.content
 });
 

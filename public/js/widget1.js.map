@@ -1,0 +1,19 @@
+{
+  "version": 3,
+  "sources": [
+    "node_modules/browserify/node_modules/browser-pack/_prelude.js",
+    "src/widget/main.js",
+    "src/widget/item-view.hbs",
+    "src/widget/layout-template.hbs"
+  ],
+  "names": [],
+  "mappings": "AAAA;ACAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AC5DA;AACA;AACA;AACA;AACA;AACA;;ACLA;AACA;AACA;AACA;AACA;AACA",
+  "file": "generated.js",
+  "sourceRoot": "",
+  "sourcesContent": [
+    "(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==\"function\"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error(\"Cannot find module '\"+o+\"'\");throw f.code=\"MODULE_NOT_FOUND\",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==\"function\"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})",
+    "'use strict';\n\nvar Backbone = require('backbone');\nBackbone.$ = require('jquery');\nvar Marionette = require('backbone.marionette');\n\n// start the marionette inspector\nif (window.__agent) {\n    window.__agent.start(Backbone, Marionette);\n}\n\n\n\n\nvar myOptions = {\n    test: 'test',\n    name: 'Drew'\n};\n\nvar Widget = Marionette.Application.extend({\n    initialize: function (options) {\n        //console.log('My container:', options.container);\n    }\n});\n\nvar widget = new Widget();\n\n\n//widget.on('before:start', function (options) {\n//    options.moreData = 'Yo dawg, I h{container: '.widget1'}eard you like options so I put some options in your options!';\n//});\n//\n//widget.on('start', function (options) {\n//    console.log('on start', options);\n//});\n\n\nvar WidgetLayout = Marionette.LayoutView.extend({\n    el: '.widget1',\n\n    template: require('./layout-template.hbs'),\n\n    regions: {\n        content: '.widget__content'\n    }\n});\n\nwidget.layout = new WidgetLayout();\nwidget.layout.render();\n\n//widget.addInitializer(function(options){\n//\n    var myView = new Marionette.ItemView({\n        template: require('./item-view.hbs')\n    });\n    widget.layout.content.show(myView);\n//});\n\n\nwidget.start(myOptions);\n",
+    "// hbsfy compiled Handlebars template\nvar HandlebarsCompiler = require('hbsfy/runtime');\nmodule.exports = HandlebarsCompiler.template({\"compiler\":[6,\">= 2.0.0-beta.1\"],\"main\":function(depth0,helpers,partials,data) {\n    return \"<h1>test widget</h1>\";\n},\"useData\":true});\n",
+    "// hbsfy compiled Handlebars template\nvar HandlebarsCompiler = require('hbsfy/runtime');\nmodule.exports = HandlebarsCompiler.template({\"compiler\":[6,\">= 2.0.0-beta.1\"],\"main\":function(depth0,helpers,partials,data) {\n    return \"<main class=\\\"widget__content\\\" role=\\\"main\\\"></main>\";\n},\"useData\":true});\n"
+  ]
+}

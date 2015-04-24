@@ -11,7 +11,7 @@ function getRandomArbitrary(min, max) {
     return (Math.random() * (max - min) + min).toFixed(2);
 }
 
-for (var i = 0; i < 24; i++) {
+for (var i = 0; i < 4; i++) {
     collection.add({
         id: faker.random.uuid(),
         accountName: faker.name.findName(),

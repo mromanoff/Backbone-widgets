@@ -1,6 +1,6 @@
 'use strict';
 
-var Router = require('../common/core/router');
+var Router = require('../../common/core/router');
 var IndexRoute = require('./route');
 
 module.exports = Router.extend({

@@ -4850,9 +4850,6 @@ button.close {
   .hidden-print {
     display: none !important; } }
 
-.application {
-  padding-top: 51px; }
-
 .accounts h3 {
   margin: 0;
   float: left; }
@@ -4919,8 +4916,3 @@ button.close {
     .account--list-view .account__allocation .value {
       font-size: 26px;
       padding: 0 10px; }
-
-html, body, .application {
-  position: relative;
-  height: 100%;
-  width: 100%; }

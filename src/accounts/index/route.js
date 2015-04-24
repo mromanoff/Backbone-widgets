@@ -1,6 +1,6 @@
 'use strict';
 
-var Route = require('../common/core/route');
+var Route = require('../../common/core/route');
 var Collection = require('./collection');
 var View = require('./composite-view');
 
