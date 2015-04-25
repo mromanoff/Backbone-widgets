@@ -1,6 +1,6 @@
 'use strict';
 
-var Model = require('../../src/accounts/model');
+var Model = require('.././model');
 
 describe('Accounts Model', function () {
     it('should be defined', function () {

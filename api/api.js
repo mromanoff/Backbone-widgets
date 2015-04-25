@@ -7,5 +7,6 @@ api.use(logger('dev'));
 api.use(bodyParser.json());
 
 require('./accounts/routes')(api);
+require('./widget/routes')(api);
 
 module.exports = api;

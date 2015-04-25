@@ -1,8 +1,5 @@
 var Backbone = require('backbone');
 var faker = require('faker');
-//var fixture = require('./fixture');
-//var collection = new Backbone.Collection(fixture);
-
 var collection = new Backbone.Collection();
 
 // Returns a random number between min (inclusive) and max (exclusive)

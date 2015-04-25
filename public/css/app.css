@@ -4916,3 +4916,21 @@ button.close {
     .account--list-view .account__allocation .value {
       font-size: 26px;
       padding: 0 10px; }
+
+.widget1 > div {
+  margin-left: -15px;
+  margin-right: -15px; }
+  .widget1 > div:before, .widget1 > div:after {
+    content: " ";
+    display: table; }
+  .widget1 > div:after {
+    clear: both; }
+  .widget1 > div > div {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px; }
+    @media (min-width: 768px) {
+      .widget1 > div > div {
+        float: left;
+        width: 33.33333%; } }

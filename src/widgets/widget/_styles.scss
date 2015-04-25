@@ -1,0 +1,8 @@
+.widget {
+  > div {
+    @include make-row();
+    > div {
+      @include make-sm-column(4);
+    }
+  }
+}

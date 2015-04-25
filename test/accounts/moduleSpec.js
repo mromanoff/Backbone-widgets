@@ -1,6 +1,6 @@
 'use strict';
 
-var module = require('../../src/accounts/module');
+var module = require('.././module');
 
 describe('Accounts Module', function () {
     it('should be defined', function () {
