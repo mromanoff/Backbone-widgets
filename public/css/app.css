@@ -4917,20 +4917,20 @@ button.close {
       font-size: 26px;
       padding: 0 10px; }
 
-.widget1 > div {
+.widget > div {
   margin-left: -15px;
   margin-right: -15px; }
-  .widget1 > div:before, .widget1 > div:after {
+  .widget > div:before, .widget > div:after {
     content: " ";
     display: table; }
-  .widget1 > div:after {
+  .widget > div:after {
     clear: both; }
-  .widget1 > div > div {
+  .widget > div > div {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px; }
     @media (min-width: 768px) {
-      .widget1 > div > div {
+      .widget > div > div {
         float: left;
         width: 33.33333%; } }

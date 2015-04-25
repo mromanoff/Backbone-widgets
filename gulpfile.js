@@ -5,7 +5,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var sass = require('gulp-sass');
 var rename = require('gulp-rename');
 var watch = require('gulp-watch');
-var util = require('util');
+var plumber = require('gulp-plumber');
 var del = require('del');
 var browserify = require('browserify');
 
@@ -34,7 +34,7 @@ gulp.task('styles', function () {
         .pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('watch', ['build'], function (cb) {
+gulp.task('watch', ['build'], function () {
     gulp.watch(paths.styles, ['styles']);
 });
 
