@@ -9,6 +9,8 @@ var plumber = require('gulp-plumber');
 var del = require('del');
 var browserify = require('browserify');
 
+var karma = require('karma').server;
+
 var paths = {
     styles: ['./src/main.scss', './src/**/*.scss']
 };
@@ -39,18 +41,19 @@ gulp.task('watch', ['build'], function () {
 });
 
 
-//gulp.task('watch-karma', function() {
-//    return karma.server.start({
-//        configFile: __dirname + '/karma.conf.js'
-//    });
-//});
-//
-//gulp.task('test', function () {
-//    return karma.server.start({
-//        configFile: __dirname + '/karma.conf.js',
-//        singleRun: true
-//    });
-//});
+gulp.task('tdd', function() {
+    return karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: false
+    });
+});
+
+gulp.task('test', function () {
+    return karma.start({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    });
+});
 
 gulp.task('build', [
     'clean',

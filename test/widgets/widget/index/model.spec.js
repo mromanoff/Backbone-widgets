@@ -3,7 +3,7 @@
 var Backbone = require('backbone');
 var Model = require('../../../../src/widgets/widget/index/model');
 
-describe('Widget Index Model', function () {
+describe('widget/index/model', function () {
     it('exists', function() {
         expect(Model).toBeDefined();
     });

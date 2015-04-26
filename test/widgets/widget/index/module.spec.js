@@ -4,8 +4,8 @@ var Marionette = require('backbone.marionette');
 var module = require('../../../../src/widgets/widget/index/module');
 
 
-// Test that the Router exists.
-describe('Widget Index Module', function () {
+// Test that the Module exists.
+describe('widget/index/module', function () {
     it('exists', function () {
         expect(module).toBeDefined();
     });
