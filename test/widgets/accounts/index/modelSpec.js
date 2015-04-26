@@ -1,10 +1,15 @@
 'use strict';
 
-var Model = require('.././model');
+var Backbone = require('backbone');
+var Model = require('../../../../src/widgets/widget/index/model');
 
-describe('Accounts Model', function () {
-    it('should be defined', function () {
+describe('Widget Index Model', function () {
+    it('exists', function() {
         expect(Model).toBeDefined();
+    });
+
+    it('is a Backbone.Router', function() {
+        expect(Model.prototype instanceof Backbone.Model).toBe(true);
     });
 
     describe('when creating a new model', function () {
@@ -13,7 +18,7 @@ describe('Accounts Model', function () {
             this.model = new Model({
                 accountName: 'Savings',
                 allocationValue: 123,
-                allocationPercentage: -10.3
+                allocationPercentage: -1.3
             });
         });
 
@@ -27,8 +32,7 @@ describe('Accounts Model', function () {
         });
 
         it('should expose the allocation percentage attribute', function () {
-            expect(this.model.get('allocationPercentage')).toEqual(-10.3);
+            expect(this.model.get('allocationPercentage')).toEqual(-1.3);
         });
     });
-
 });
