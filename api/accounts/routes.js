@@ -2,13 +2,16 @@ var Backbone = require('backbone');
 var faker = require('faker');
 var collection = new Backbone.Collection();
 
+
+var limit = 40;
+
 // Returns a random number between min (inclusive) and max (exclusive)
 function getRandomArbitrary(min, max) {
     'use strict';
     return (Math.random() * (max - min) + min).toFixed(2);
 }
 
-for (var i = 0; i < 4; i++) {
+for (var i = 0; i < limit; i++) {
     collection.add({
         id: faker.random.uuid(),
         accountName: faker.name.findName(),

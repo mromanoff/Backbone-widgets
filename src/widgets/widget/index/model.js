@@ -1,7 +1,7 @@
 'use strict';
 
-var Model = require('../../../common/core/model');
-var API = require('../../../config/api-config');
+var Model = require('core/model');
+var API = require('config/api');
 
 module.exports = Model.extend({
     defaults: {

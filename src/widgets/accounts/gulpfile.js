@@ -9,8 +9,8 @@ var transform = require('vinyl-transform');
 var buffer = require('vinyl-buffer');
 var exorcist = require('exorcist');
 var watchify = require('watchify');
-var _ = require('lodash');
-var vendor = require('../../../gulp-config').vendor;
+var _ = require('underscore');
+var core = require('../../config/bundle').core;
 
 var bundleName = 'accounts';
 
@@ -30,7 +30,7 @@ var bundler = _.memoize(function (watch) {
 
     var b = browserify(options)
         .add(paths.src + '/main.js')
-        .external(vendor);
+        .external(core);
 
     if (watch) {
         b = watchify(b);

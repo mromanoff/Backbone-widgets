@@ -4,7 +4,7 @@ var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 
 
-var Widget = require('./widget/widget');
+var Widget = require('./layout/module');
 
 var widget = new Widget();
 

@@ -1,7 +1,7 @@
 'use strict';
 
-var Application = require('../../../common/core/application');
-var LayoutView = require('./layout-view');
+var Application = require('core/application');
+var LayoutView = require('./view');
 
 module.exports = Application.extend({
     initialize: function() {

@@ -1,20 +1,16 @@
 'use strict';
 
-var Collection = require('../../../common/core/collection');
+var Collection = require('core/collection');
 var Model = require('./model');
-var API = require('../../../config/api-config');
+var API = require('config/api');
+var _ = require('underscore');
 
 module.exports = Collection.extend({
     model: Model,
     url: API.accounts,
 
-
-    initialize: function () {
-        console.log('collction', API.accounts);
-    },
-
     parse: function (response) {
-        return response;
+        return _.sample(response, 4);
     }
 });
 

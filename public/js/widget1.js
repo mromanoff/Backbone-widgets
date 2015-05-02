@@ -5,7 +5,7 @@ var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 
 
-var Widget = require('./widget/widget');
+var Widget = require('./layout/module');
 
 var widget = new Widget();
 
@@ -14,96 +14,7 @@ widget.module('index', {
     container: widget.layout.content
 });
 
-},{"./index/module":9,"./widget/widget":14,"backbone":"backbone","jquery":"jquery"}],2:[function(require,module,exports){
-'use strict';
-
-var Marionette = require('backbone.marionette');
-
-module.exports = Marionette.Application.extend({
-    // Polyfill for:
-    // https://github.com/marionettejs/backbone.marionette/pull/1723
-    constructor: function() {
-        Marionette.Application.apply(this, arguments);
-        this.initialize.apply(this, arguments);
-    }
-});
-
-},{"backbone.marionette":"backbone.marionette"}],3:[function(require,module,exports){
-'use strict';
-
-var Marionette = require('backbone.marionette');
-
-module.exports = Marionette.ItemView;
-
-},{"backbone.marionette":"backbone.marionette"}],4:[function(require,module,exports){
-'use strict';
-
-var Marionette = require('backbone.marionette');
-
-module.exports = Marionette.LayoutView;
-
-},{"backbone.marionette":"backbone.marionette"}],5:[function(require,module,exports){
-'use strict';
-
-var Backbone = require('backbone');
-var Radio = require('backbone.radio');
-
-var flashesChannel = Radio.channel('flashes');
-
-module.exports = Backbone.Model.extend({
-    constructor: function () {
-        Backbone.Model.apply(this, arguments);
-        this.on('request', this.handleRequest);
-        this.on('error', this.handleError);
-    },
-
-    handleRequest: function () {
-        flashesChannel.command('remove', this.serverError);
-        delete this.serverError;
-    },
-
-    handleError: function () {
-        this.serverError = {type: 'danger', title: 'Server Error'};
-        flashesChannel.command('add', this.serverError);
-    },
-
-    cleanup: function () {
-        if (this.serverError) {
-            flashesChannel.command('remove', this.serverError);
-        }
-        delete this.serverError;
-        delete this.validationError;
-    }
-});
-
-},{"backbone":"backbone","backbone.radio":"backbone.radio"}],6:[function(require,module,exports){
-'use strict';
-
-var Marionette = require('backbone.marionette');
-var Backbone = require('backbone');
-
-module.exports = Marionette.Module.extend({
-    constructor: function() {
-        this.listenTo(Backbone.history, 'route', this._onHistoryRoute);
-        Marionette.Module.apply(this, arguments);
-    },
-
-    initialize: function() {},
-
-    _onHistoryRoute: function(router) {
-        if (!this.router) {
-            return;
-        }
-
-        if (this.router && this.router === router) {
-            this.start();
-        } else {
-            this.stop();
-        }
-    }
-});
-
-},{"backbone":"backbone","backbone.marionette":"backbone.marionette"}],7:[function(require,module,exports){
+},{"./index/module":4,"./layout/module":7,"backbone":"backbone","jquery":"jquery"}],2:[function(require,module,exports){
 'use strict';
 
 var API = {
@@ -115,11 +26,11 @@ module.exports = API;
 
 
 
-},{}],8:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 'use strict';
 
-var Model = require('../../../common/core/model');
-var API = require('../../../config/api-config');
+var Model = require('core/model');
+var API = require('config/api');
 
 module.exports = Model.extend({
     defaults: {
@@ -131,11 +42,11 @@ module.exports = Model.extend({
     url: API.widget1
 });
 
-},{"../../../common/core/model":5,"../../../config/api-config":7}],9:[function(require,module,exports){
+},{"config/api":2,"core/model":"core/model"}],4:[function(require,module,exports){
 'use strict';
 
 
-var Module = require('../../../common/core/module');
+var Module = require('core/module');
 var Model = require('./model');
 var View = require('./view');
 
@@ -162,7 +73,7 @@ module.exports = Module.extend({
     }
 });
 
-},{"../../../common/core/module":6,"./model":8,"./view":11}],10:[function(require,module,exports){
+},{"./model":3,"./view":6,"core/module":"core/module"}],5:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
@@ -176,13 +87,15 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
     + alias3(((helper = (helper = helpers.currencySymbol || (depth0 != null ? depth0.currencySymbol : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"currencySymbol","hash":{},"data":data}) : helper)))
     + "</h4>\n            <div>"
     + alias3(((helper = (helper = helpers.allocationPercentage || (depth0 != null ? depth0.allocationPercentage : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationPercentage","hash":{},"data":data}) : helper)))
-    + "</div>\n        </div>\n        <div>\n            <h4>Title</h4>\n            <div>Text</div>\n        </div>\n    </div>\n</section>";
+    + "</div>\n        </div>\n        <div>\n            <h4>"
+    + alias3((helpers.upcase || (depth0 && depth0.upcase) || alias1).call(depth0,"Title",{"name":"upcase","hash":{},"data":data}))
+    + "</h4>\n            <div>Text</div>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
-},{"hbsfy/runtime":"hbsfy/runtime"}],11:[function(require,module,exports){
+},{"hbsfy/runtime":"hbsfy/runtime"}],6:[function(require,module,exports){
 'use strict';
 
-var ItemView = require('../../../common/core/item-view');
+var ItemView = require('core/item-view');
 var template = require('./template.hbs');
 
 module.exports = ItemView.extend({
@@ -190,18 +103,31 @@ module.exports = ItemView.extend({
     className: 'widget'
 });
 
-},{"../../../common/core/item-view":3,"./template.hbs":10}],12:[function(require,module,exports){
+},{"./template.hbs":5,"core/item-view":"core/item-view"}],7:[function(require,module,exports){
+'use strict';
+
+var Application = require('core/application');
+var LayoutView = require('./view');
+
+module.exports = Application.extend({
+    initialize: function() {
+        this.layout = new LayoutView();
+        this.layout.render();
+    }
+});
+
+},{"./view":9,"core/application":"core/application"}],8:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     return "<main class=\"widget__content\" role=\"main\"></main>\n";
 },"useData":true});
 
-},{"hbsfy/runtime":"hbsfy/runtime"}],13:[function(require,module,exports){
+},{"hbsfy/runtime":"hbsfy/runtime"}],9:[function(require,module,exports){
 'use strict';
 
-var LayoutView = require('../../../common/core/layout-view');
-var template = require('./layout-template.hbs');
+var LayoutView = require('core/layout-view');
+var template = require('./template.hbs');
 
 module.exports = LayoutView.extend({
     el: '.widget1',
@@ -212,20 +138,7 @@ module.exports = LayoutView.extend({
     }
 });
 
-},{"../../../common/core/layout-view":4,"./layout-template.hbs":12}],14:[function(require,module,exports){
-'use strict';
-
-var Application = require('../../../common/core/application');
-var LayoutView = require('./layout-view');
-
-module.exports = Application.extend({
-    initialize: function() {
-        this.layout = new LayoutView();
-        this.layout.render();
-    }
-});
-
-},{"../../../common/core/application":2,"./layout-view":13}]},{},[1])
+},{"./template.hbs":8,"core/layout-view":"core/layout-view"}]},{},[1])
 
 
 //# sourceMappingURL=widget1.js.map

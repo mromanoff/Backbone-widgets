@@ -6,9 +6,12 @@ var uglify = require('gulp-uglify');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var vendor = require('../../gulp-config').vendor;
+var transform = require('vinyl-transform');
+var exorcist = require('exorcist');
 
-var bundleName = 'vendor';
+var core = require('../config/bundle').core;
+
+var bundleName = 'core';
 
 var paths = {
     dest: '../../public/js/'
@@ -16,16 +19,19 @@ var paths = {
 
 gulp.task(bundleName + ':scripts', function () {
     var b = browserify({
-        debug: false
+        debug: true
     });
 
-    return b.require(vendor)
+    return b.require(core)
         .bundle()
         .on('error', util.log)
         .pipe(source(bundleName + '.js'))
         .pipe(buffer())
-        .pipe(uglify())
-        .pipe(gulp.dest(paths.dest))
+        .pipe(transform(function () {
+            return exorcist(paths.dest + bundleName + '.js.map');
+        }))
+        //.pipe(uglify())
+        .pipe(gulp.dest(paths.dest));
 });
 
 gulp.task(bundleName + ':build', [bundleName + ':scripts']);

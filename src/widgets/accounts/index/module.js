@@ -1,7 +1,7 @@
 'use strict';
 
 
-var Module = require('../../../common/core/module');
+var Module = require('core/module');
 var Collection = require('./collection');
 var View = require('./composite-view');
 
