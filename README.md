@@ -1,6 +1,6 @@
 ###Backbone widget app
 
-####Build application with multiple widget on the page.
+####Build application with multiple widgets on the page.
 
 #### Build on
 * NodeJS
