@@ -19,7 +19,8 @@ widget.module('index', {
 
 var API = {
     accounts: '/api/accounts',
-    widget1: '/api/widget'
+    widget1: '/api/widget',
+    charts: 'api/charts'
 };
 
 module.exports = API;
@@ -34,17 +35,16 @@ var API = require('config/api');
 
 module.exports = Model.extend({
     defaults: {
-        accountName: null,
-        allocationValue: null,
-        currencySymbol: null,
-        allocationPercentage: null
+        firstName: null,
+        lastName: null,
+        avatar: null,
+        telephone: null
     },
     url: API.widget1
 });
 
 },{"config/api":2,"core/model":"core/model"}],4:[function(require,module,exports){
 'use strict';
-
 
 var Module = require('core/module');
 var Model = require('./model');
@@ -53,11 +53,10 @@ var View = require('./view');
 module.exports = Module.extend({
     initialize: function() {
         this.container = this.options.container;
-        var self = this;
-        this.fetch().then(function () {
-            self.render();
-        });
 
+        this.fetch().then(function () {
+            this.render();
+        }.bind(this));
     },
 
     fetch: function() {
@@ -77,19 +76,21 @@ module.exports = Module.extend({
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
+    var helper, alias1=helpers.helperMissing, alias2=this.escapeExpression, alias3="function";
 
-  return "<section class=\"widget container\">\n    <h3>Widget 1</h3>\n\n    <div>\n        <div>\n            <h4>"
-    + alias3(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"accountName","hash":{},"data":data}) : helper)))
-    + "</h4>\n            <div>"
-    + alias3(((helper = (helper = helpers.allocationValue || (depth0 != null ? depth0.allocationValue : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationValue","hash":{},"data":data}) : helper)))
-    + "</div>\n        </div>\n        <div>\n            <h4>"
-    + alias3(((helper = (helper = helpers.currencySymbol || (depth0 != null ? depth0.currencySymbol : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"currencySymbol","hash":{},"data":data}) : helper)))
-    + "</h4>\n            <div>"
-    + alias3(((helper = (helper = helpers.allocationPercentage || (depth0 != null ? depth0.allocationPercentage : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationPercentage","hash":{},"data":data}) : helper)))
-    + "</div>\n        </div>\n        <div>\n            <h4>"
-    + alias3((helpers.upcase || (depth0 && depth0.upcase) || alias1).call(depth0,"Title",{"name":"upcase","hash":{},"data":data}))
-    + "</h4>\n            <div>Text</div>\n        </div>\n    </div>\n</section>";
+  return "<section>\n    <h3>Widget 1</h3>\n\n    <div>\n        <div>\n            <h4>User name</h4>\n            <div>"
+    + alias2((helpers.upcase || (depth0 && depth0.upcase) || alias1).call(depth0,(depth0 != null ? depth0.firstName : depth0),{"name":"upcase","hash":{},"data":data}))
+    + " "
+    + alias2((helpers.upcase || (depth0 && depth0.upcase) || alias1).call(depth0,(depth0 != null ? depth0.lastName : depth0),{"name":"upcase","hash":{},"data":data}))
+    + "</div>\n        </div>\n        <div>\n            <h4>Avatar</h4>\n            <div><img src=\""
+    + alias2(((helper = (helper = helpers.avatar || (depth0 != null ? depth0.avatar : depth0)) != null ? helper : alias1),(typeof helper === alias3 ? helper.call(depth0,{"name":"avatar","hash":{},"data":data}) : helper)))
+    + "\" alt=\""
+    + alias2(((helper = (helper = helpers.firstName || (depth0 != null ? depth0.firstName : depth0)) != null ? helper : alias1),(typeof helper === alias3 ? helper.call(depth0,{"name":"firstName","hash":{},"data":data}) : helper)))
+    + " "
+    + alias2(((helper = (helper = helpers.lastName || (depth0 != null ? depth0.lastName : depth0)) != null ? helper : alias1),(typeof helper === alias3 ? helper.call(depth0,{"name":"lastName","hash":{},"data":data}) : helper)))
+    + "\"></div>\n        </div>\n        <div>\n            <h4>Telephone</h4>\n            <div>"
+    + alias2(((helper = (helper = helpers.telephone || (depth0 != null ? depth0.telephone : depth0)) != null ? helper : alias1),(typeof helper === alias3 ? helper.call(depth0,{"name":"telephone","hash":{},"data":data}) : helper)))
+    + "</div>\n        </div>\n    </div>\n</section>";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],6:[function(require,module,exports){
@@ -99,8 +100,7 @@ var ItemView = require('core/item-view');
 var template = require('./template.hbs');
 
 module.exports = ItemView.extend({
-    template: template,
-    className: 'widget'
+    template: template
 });
 
 },{"./template.hbs":5,"core/item-view":"core/item-view"}],7:[function(require,module,exports){
@@ -120,7 +120,7 @@ module.exports = Application.extend({
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<main class=\"widget__content\" role=\"main\"></main>\n";
+    return "<main class=\"widget1__content\" role=\"main\"></main>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],9:[function(require,module,exports){
@@ -134,7 +134,7 @@ module.exports = LayoutView.extend({
     template: template,
 
     regions: {
-        content: '.widget__content'
+        content: '.widget1__content'
     }
 });
 

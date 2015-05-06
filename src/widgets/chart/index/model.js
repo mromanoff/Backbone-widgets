@@ -5,10 +5,11 @@ var API = require('config/api');
 
 module.exports = Model.extend({
     defaults: {
-        firstName: null,
-        lastName: null,
-        avatar: null,
-        telephone: null
+        label: null,
+        innerLabel: null,
+        value: null,
+        color: '#000'
     },
+
     url: API.widget1
 });

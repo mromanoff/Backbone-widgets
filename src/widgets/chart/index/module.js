@@ -1,10 +1,8 @@
 'use strict';
 
-
 var Module = require('core/module');
 var Collection = require('./collection');
-var View = require('./composite-view');
-
+var View = require('./view');
 
 module.exports = Module.extend({
     initialize: function() {
@@ -12,7 +10,6 @@ module.exports = Module.extend({
         this.fetch().then(function () {
             this.render();
         }.bind(this));
-
     },
 
     fetch: function() {

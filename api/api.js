@@ -8,5 +8,6 @@ api.use(bodyParser.json());
 
 require('./accounts/routes')(api);
 require('./widget/routes')(api);
+require('./chart/routes')(api);
 
 module.exports = api;

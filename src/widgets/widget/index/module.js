@@ -1,6 +1,5 @@
 'use strict';
 
-
 var Module = require('core/module');
 var Model = require('./model');
 var View = require('./view');
@@ -8,11 +7,10 @@ var View = require('./view');
 module.exports = Module.extend({
     initialize: function() {
         this.container = this.options.container;
-        var self = this;
-        this.fetch().then(function () {
-            self.render();
-        });
 
+        this.fetch().then(function () {
+            this.render();
+        }.bind(this));
     },
 
     fetch: function() {

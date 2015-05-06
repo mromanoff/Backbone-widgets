@@ -11,10 +11,10 @@ function getRandomArbitrary(min, max) {
 
 model.set({
     id: faker.random.uuid(),
-    accountName: faker.name.findName(),
-    allocationValue: faker.finance.amount(),
-    currencySymbol: faker.finance.currencySymbol(),
-    allocationPercentage: getRandomArbitrary(-1, 1)
+    firstName: faker.name.firstName(),
+    lastName: faker.name.firstName(),
+    avatar: faker.internet.avatar(),
+    telephone: faker.phone.phoneNumber()
 });
 
 module.exports = function (api) {

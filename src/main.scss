@@ -1,5 +1,8 @@
 @import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+@import "core/styles";
+
 @import "widgets/accounts/styles";
 @import "widgets/widget/styles";
+@import "widgets/chart/styles";
 

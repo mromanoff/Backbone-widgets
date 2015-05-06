@@ -1,8 +1,10 @@
-.widget {
-  > div {
-    @include make-row();
+.widget1__content {
+  section {
     > div {
-      @include make-sm-column(4);
+      @include make-row();
+      > div {
+        @include make-sm-column(4);
+      }
     }
   }
 }

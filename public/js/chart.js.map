@@ -1,0 +1,35 @@
+{
+  "version": 3,
+  "sources": [
+    "../../../node_modules/browserify/node_modules/browser-pack/_prelude.js",
+    "main.js",
+    "../../config/api.js",
+    "index/collection.js",
+    "index/graph.js",
+    "index/model.js",
+    "index/module.js",
+    "index/template.hbs",
+    "index/view.js",
+    "layout/module.js",
+    "layout/template.hbs",
+    "layout/view.js"
+  ],
+  "names": [],
+  "mappings": "AAAA;ACAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;ACdA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;ACXA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AChBA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AChDA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;ACfA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AC1BA;AACA;AACA;AACA;AACA;AACA;;ACLA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;AC3BA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;;ACXA;AACA;AACA;AACA;AACA;AACA;;ACLA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+  "file": "generated.js",
+  "sourceRoot": "",
+  "sourcesContent": [
+    "(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require==\"function\"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error(\"Cannot find module '\"+o+\"'\");throw f.code=\"MODULE_NOT_FOUND\",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require==\"function\"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})",
+    "'use strict';\n\nvar Backbone = require('backbone');\nBackbone.$ = require('jquery');\n\n\nvar Widget = require('./layout/module');\n\nvar widget = new Widget();\n\nwidget.module('index', {\n    moduleClass: require('./index/module'),\n    container: widget.layout.content\n});\n",
+    "'use strict';\n\nvar API = {\n    accounts: '/api/accounts',\n    widget1: '/api/widget',\n    charts: 'api/charts'\n};\n\nmodule.exports = API;\n\n\n",
+    "'use strict';\n\nvar Collection = require('core/collection');\nvar Model = require('./model');\nvar API = require('config/api');\nvar _ = require('underscore');\n\nmodule.exports = Collection.extend({\n    model: Model,\n    url: API.charts,\n\n    parse: function (response) {\n        return _.sample(response, 4);\n    }\n});\n\n",
+    "'use strict';\n\nvar d3 = require('d3');\n\n\nvar HorizontalBarGraph = function (el, series) {\n    this.el = d3.select(el);\n    this.series = series;\n};\n\nHorizontalBarGraph.prototype.draw = function () {\n    var x = d3.scale.linear()\n        .domain([0, d3.max(this.series, function (d) {\n            return d.value;\n        })])\n        .range([0, 100]);\n\n    var segment = this.el\n        .selectAll('.horizontal-bar-graph-segment')\n        .data(this.series)\n        .enter()\n        .append('div').classed('horizontal-bar-graph-segment', true);\n\n    segment\n        .append('div').classed('horizontal-bar-graph-label', true)\n        .text(function (d) {\n            return d.label;\n        });\n\n    segment\n        .append('div').classed('horizontal-bar-graph-value', true)\n        .append('div').classed('horizontal-bar-graph-value-bar', true)\n        .style('background-color', function (d) {\n            return d.color;\n        })\n        .text(function (d) {\n            //return d.innerLabel ? d.innerLabel : '';\n            return d.value ? d.value : '';\n        })\n        .transition()\n        .duration(1000)\n        .style('min-width', function (d) {\n            return x(d.value) + '%';\n        });\n};\n\nmodule.exports = HorizontalBarGraph;\n\n",
+    "'use strict';\n\nvar Model = require('core/model');\nvar API = require('config/api');\n\nmodule.exports = Model.extend({\n    defaults: {\n        label: null,\n        innerLabel: null,\n        value: null,\n        color: '#000'\n    },\n\n    url: API.widget1\n});\n",
+    "'use strict';\n\nvar Module = require('core/module');\nvar Collection = require('./collection');\nvar View = require('./view');\n\nmodule.exports = Module.extend({\n    initialize: function() {\n        this.container = this.options.container;\n        this.fetch().then(function () {\n            this.render();\n        }.bind(this));\n    },\n\n    fetch: function() {\n        this.collection = new Collection();\n        return this.collection.fetch();\n    },\n\n    render: function() {\n        this.view = new View({\n            collection: this.collection\n        });\n        this.container.show(this.view);\n    }\n});\n",
+    "// hbsfy compiled Handlebars template\nvar HandlebarsCompiler = require('hbsfy/runtime');\nmodule.exports = HandlebarsCompiler.template({\"compiler\":[6,\">= 2.0.0-beta.1\"],\"main\":function(depth0,helpers,partials,data) {\n    return \"<section>\\n    <h3>Sample Chart</h3>\\n    <button class=\\\"btn btn-primary\\\">refresh data</button>\\n    <div class=\\\"horizontal-bar-graph\\\" id=\\\"graph\\\"></div>\\n</section>\";\n},\"useData\":true});\n",
+    "'use strict';\n\nvar ItemView = require('core/item-view');\nvar template = require('./template.hbs');\n\nvar Graph = require('./graph');\n\nmodule.exports = ItemView.extend({\n    template: template,\n\n    events: {\n        'click button': 'reload'\n    },\n\n    onRender: function () {\n        var graph = new Graph(\n            this.el.querySelector('#graph'),\n            this.collection.toJSON()\n        );\n        graph.draw();\n    },\n\n    reload: function () {\n        this.collection.fetch();\n        this.render();\n    }\n});\n",
+    "'use strict';\n\nvar Application = require('core/application');\nvar LayoutView = require('./view');\n\nmodule.exports = Application.extend({\n    initialize: function() {\n        this.layout = new LayoutView();\n        this.layout.render();\n    }\n});\n",
+    "// hbsfy compiled Handlebars template\nvar HandlebarsCompiler = require('hbsfy/runtime');\nmodule.exports = HandlebarsCompiler.template({\"compiler\":[6,\">= 2.0.0-beta.1\"],\"main\":function(depth0,helpers,partials,data) {\n    return \"<main class=\\\"widget__content\\\" role=\\\"main\\\"></main>\\n\";\n},\"useData\":true});\n",
+    "'use strict';\n\nvar LayoutView = require('core/layout-view');\nvar template = require('./template.hbs');\n\nmodule.exports = LayoutView.extend({\n    el: '.chart',\n    template: template,\n\n    regions: {\n        content: '.widget__content'\n    }\n});\n"
+  ]
+}
