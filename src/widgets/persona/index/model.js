@@ -10,5 +10,5 @@ module.exports = Model.extend({
         avatar: null,
         telephone: null
     },
-    url: API.widget1
+    url: API.persona
 });

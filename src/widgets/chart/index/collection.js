@@ -7,10 +7,6 @@ var _ = require('underscore');
 
 module.exports = Collection.extend({
     model: Model,
-    url: API.charts,
-
-    parse: function (response) {
-        return _.sample(response, 4);
-    }
+    url: API.charts
 });
 

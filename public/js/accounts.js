@@ -26,7 +26,8 @@ if (window.__agent) {
 
 var API = {
     accounts: '/api/accounts',
-    widget1: '/api/widget'
+    persona: '/api/persona',
+    charts: '/api/charts'
 };
 
 module.exports = API;
@@ -101,7 +102,6 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
     + alias3(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"accountName","hash":{},"data":data}) : helper)))
     + "</div>\n<div class=\"account__allocation\">\n    <span class=\"title\">Today's total value</span>\n    <span class=\"value\">"
     + alias3(((helper = (helper = helpers.currencySymbol || (depth0 != null ? depth0.currencySymbol : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"currencySymbol","hash":{},"data":data}) : helper)))
-    + " "
     + alias3(((helper = (helper = helpers.allocationValue || (depth0 != null ? depth0.allocationValue : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationValue","hash":{},"data":data}) : helper)))
     + "</span>\n</div>\n<div class=\"account__chart\"></div>";
 },"useData":true});
@@ -127,10 +127,11 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
   return "<div class=\"account__title\">"
     + alias3(((helper = (helper = helpers.accountName || (depth0 != null ? depth0.accountName : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"accountName","hash":{},"data":data}) : helper)))
     + "</div>\n<div class=\"account__chart\"></div>\n<div class=\"account__allocation\">\n    <span class=\"value\">"
+    + alias3(((helper = (helper = helpers.currencySymbol || (depth0 != null ? depth0.currencySymbol : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"currencySymbol","hash":{},"data":data}) : helper)))
     + alias3(((helper = (helper = helpers.allocationValue || (depth0 != null ? depth0.allocationValue : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationValue","hash":{},"data":data}) : helper)))
     + "</span>\n    <span class=\"percentage\">"
     + alias3(((helper = (helper = helpers.allocationPercentage || (depth0 != null ? depth0.allocationPercentage : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"allocationPercentage","hash":{},"data":data}) : helper)))
-    + "</span>\n</div>";
+    + "%</span>\n</div>";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],9:[function(require,module,exports){
@@ -171,10 +172,9 @@ var View = require('./composite-view');
 module.exports = Module.extend({
     initialize: function() {
         this.container = this.options.container;
-        var self = this;
         this.fetch().then(function () {
-            self.render();
-        });
+            this.render();
+        }.bind(this));
 
     },
 
@@ -208,7 +208,7 @@ module.exports = Application.extend({
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<main class=\"widget2__content\" role=\"main\"></main>\n";
+    return "<main class=\"accounts__content\" role=\"main\"></main>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],14:[function(require,module,exports){
@@ -218,11 +218,11 @@ var LayoutView = require('core/layout-view');
 var template = require('./template.hbs');
 
 module.exports = LayoutView.extend({
-    el: '.widget2',
+    el: '.accounts',
     template: template,
 
     regions: {
-        content: '.widget2__content'
+        content: '.accounts__content'
     }
 });
 

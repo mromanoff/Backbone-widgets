@@ -4,10 +4,10 @@ var LayoutView = require('core/layout-view');
 var template = require('./template.hbs');
 
 module.exports = LayoutView.extend({
-    el: '.widget2',
+    el: '.accounts',
     template: template,
 
     regions: {
-        content: '.widget2__content'
+        content: '.accounts__content'
     }
 });

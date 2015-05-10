@@ -5,19 +5,21 @@ var Collection = require('./collection');
 var View = require('./view');
 
 module.exports = Module.extend({
-    initialize: function() {
+    initialize: function () {
         this.container = this.options.container;
+        this.collection = new Collection();
         this.fetch().then(function () {
             this.render();
         }.bind(this));
     },
 
-    fetch: function() {
-        this.collection = new Collection();
-        return this.collection.fetch();
+    fetch: function () {
+        if (this.collection.isNew()) {
+            return this.collection.fetch();
+        }
     },
 
-    render: function() {
+    render: function () {
         this.view = new View({
             collection: this.collection
         });

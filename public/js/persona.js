@@ -19,8 +19,8 @@ widget.module('index', {
 
 var API = {
     accounts: '/api/accounts',
-    widget1: '/api/widget',
-    charts: 'api/charts'
+    persona: '/api/persona',
+    charts: '/api/charts'
 };
 
 module.exports = API;
@@ -40,7 +40,7 @@ module.exports = Model.extend({
         avatar: null,
         telephone: null
     },
-    url: API.widget1
+    url: API.persona
 });
 
 },{"config/api":2,"core/model":"core/model"}],4:[function(require,module,exports){
@@ -78,7 +78,7 @@ var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
     var helper, alias1=helpers.helperMissing, alias2=this.escapeExpression, alias3="function";
 
-  return "<section>\n    <h3>Widget 1</h3>\n\n    <div>\n        <div>\n            <h4>User name</h4>\n            <div>"
+  return "<section>\n    <h3>Persona</h3>\n\n    <div>\n        <div>\n            <h4>User name</h4>\n            <div>"
     + alias2((helpers.upcase || (depth0 && depth0.upcase) || alias1).call(depth0,(depth0 != null ? depth0.firstName : depth0),{"name":"upcase","hash":{},"data":data}))
     + " "
     + alias2((helpers.upcase || (depth0 && depth0.upcase) || alias1).call(depth0,(depth0 != null ? depth0.lastName : depth0),{"name":"upcase","hash":{},"data":data}))
@@ -120,7 +120,7 @@ module.exports = Application.extend({
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<main class=\"widget1__content\" role=\"main\"></main>\n";
+    return "<main class=\"persona__content\" role=\"main\"></main>\n";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],9:[function(require,module,exports){
@@ -130,15 +130,15 @@ var LayoutView = require('core/layout-view');
 var template = require('./template.hbs');
 
 module.exports = LayoutView.extend({
-    el: '.widget1',
+    el: '.persona',
     template: template,
 
     regions: {
-        content: '.widget1__content'
+        content: '.persona__content'
     }
 });
 
 },{"./template.hbs":8,"core/layout-view":"core/layout-view"}]},{},[1])
 
 
-//# sourceMappingURL=widget1.js.map
+//# sourceMappingURL=persona.js.map

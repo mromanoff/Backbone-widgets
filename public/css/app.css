@@ -4874,7 +4874,7 @@ button.close {
   color: dodgerblue; }
 .account__chart {
   height: 14px;
-  background-color: dimgrey; }
+  background-color: #bd8ca0; }
 .account--grid-view {
   background-color: #f8f8f8;
   border: 1px solid #e7e7e7;
@@ -4926,21 +4926,21 @@ button.close {
       font-size: 26px;
       padding: 0 10px; }
 
-.widget1__content section > div {
+.persona__content section > div {
   margin-left: -15px;
   margin-right: -15px; }
-  .widget1__content section > div:before, .widget1__content section > div:after {
+  .persona__content section > div:before, .persona__content section > div:after {
     content: " ";
     display: table; }
-  .widget1__content section > div:after {
+  .persona__content section > div:after {
     clear: both; }
-  .widget1__content section > div > div {
+  .persona__content section > div > div {
     position: relative;
     min-height: 1px;
     padding-left: 15px;
     padding-right: 15px; }
     @media (min-width: 768px) {
-      .widget1__content section > div > div {
+      .persona__content section > div > div {
         float: left;
         width: 33.33333%; } }
 

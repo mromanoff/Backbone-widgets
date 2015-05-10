@@ -1,7 +1,7 @@
 'use strict';
 
 var Backbone = require('backbone');
-var Model = require('../../../../src/widgets/widget/index/model');
+var Model = require('../../.././index/model');
 
 describe('widget/index/model', function () {
     it('exists', function() {

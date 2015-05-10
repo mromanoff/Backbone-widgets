@@ -16,7 +16,7 @@ for (var i = 0; i < limit; i++) {
         id: faker.random.uuid(),
         accountName: faker.name.findName(),
         allocationValue: faker.finance.amount(),
-        currencySymbol: faker.finance.currencySymbol(),
+        currencySymbol: '$', //faker.finance.currencySymbol(),
         allocationPercentage: getRandomArbitrary(-1, 1)
     });
 }

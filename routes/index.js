@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     res.render('index', {
-        title: 'Widgets POC',
+        title: 'Backbone Widgets',
         script1: 'widget1',
         script2: 'widget2',
         script3: 'widget3',

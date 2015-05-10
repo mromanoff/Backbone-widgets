@@ -12,7 +12,7 @@ var watchify = require('watchify');
 var _ = require('underscore');
 var core = require('../../config/bundle').core;
 
-var bundleName = 'widget1';
+var bundleName = 'persona';
 
 var paths = {
     src: './',

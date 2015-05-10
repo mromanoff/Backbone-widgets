@@ -1,7 +1,7 @@
 'use strict';
 
 var Marionette = require('backbone.marionette');
-var module = require('../../../../src/widgets/widget/index/module');
+var module = require('../../.././index/module');
 
 
 // Test that the Module exists.

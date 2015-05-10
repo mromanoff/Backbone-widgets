@@ -19,8 +19,8 @@ widget.module('index', {
 
 var API = {
     accounts: '/api/accounts',
-    widget1: '/api/widget',
-    charts: 'api/charts'
+    persona: '/api/persona',
+    charts: '/api/charts'
 };
 
 module.exports = API;
@@ -37,11 +37,7 @@ var _ = require('underscore');
 
 module.exports = Collection.extend({
     model: Model,
-    url: API.charts,
-
-    parse: function (response) {
-        return _.sample(response, 4);
-    }
+    url: API.charts
 });
 
 
@@ -120,19 +116,21 @@ var Collection = require('./collection');
 var View = require('./view');
 
 module.exports = Module.extend({
-    initialize: function() {
+    initialize: function () {
         this.container = this.options.container;
+        this.collection = new Collection();
         this.fetch().then(function () {
             this.render();
         }.bind(this));
     },
 
-    fetch: function() {
-        this.collection = new Collection();
-        return this.collection.fetch();
+    fetch: function () {
+        if (this.collection.isNew()) {
+            return this.collection.fetch();
+        }
     },
 
-    render: function() {
+    render: function () {
         this.view = new View({
             collection: this.collection
         });
@@ -152,6 +150,7 @@ module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"
 
 var ItemView = require('core/item-view');
 var template = require('./template.hbs');
+var _ = require('underscore');
 
 var Graph = require('./graph');
 
@@ -165,18 +164,19 @@ module.exports = ItemView.extend({
     onRender: function () {
         var graph = new Graph(
             this.el.querySelector('#graph'),
-            this.collection.toJSON()
+            _.chain(this.collection.toJSON())
+                .sample(4)
+                .value()
         );
         graph.draw();
     },
 
     reload: function () {
-        this.collection.fetch();
         this.render();
     }
 });
 
-},{"./graph":4,"./template.hbs":7,"core/item-view":"core/item-view"}],9:[function(require,module,exports){
+},{"./graph":4,"./template.hbs":7,"core/item-view":"core/item-view","underscore":"underscore"}],9:[function(require,module,exports){
 'use strict';
 
 var Application = require('core/application');

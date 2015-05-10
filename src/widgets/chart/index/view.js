@@ -2,6 +2,7 @@
 
 var ItemView = require('core/item-view');
 var template = require('./template.hbs');
+var _ = require('underscore');
 
 var Graph = require('./graph');
 
@@ -15,13 +16,14 @@ module.exports = ItemView.extend({
     onRender: function () {
         var graph = new Graph(
             this.el.querySelector('#graph'),
-            this.collection.toJSON()
+            _.chain(this.collection.toJSON())
+                .sample(4)
+                .value()
         );
         graph.draw();
     },
 
     reload: function () {
-        this.collection.fetch();
         this.render();
     }
 });
