@@ -1,6 +1,8 @@
 ###Backbone widget app
 
-####Build application with multiple widgets on the page.
+####Build application with multiple widgets on single page.
+* Every widget treated as a separate app with own build.
+* All common libraries are bundled to core.js file
 
 #### Build on
 * NodeJS
@@ -12,3 +14,4 @@
 * Sass
 * Karma runner
 * Jasmine Unit test
+
