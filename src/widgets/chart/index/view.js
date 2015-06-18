@@ -4,7 +4,7 @@ var ItemView = require('core/item-view');
 var template = require('./template.hbs');
 var _ = require('underscore');
 
-var Graph = require('./graph');
+var Chart = require('./chart');
 
 module.exports = ItemView.extend({
     template: template,
@@ -14,13 +14,13 @@ module.exports = ItemView.extend({
     },
 
     onRender: function () {
-        var graph = new Graph(
-            this.el.querySelector('#graph'),
+        var chart = new Chart(
+            this.el.querySelector('.horizontal-bar-graph'),
             _.chain(this.collection.toJSON())
                 .sample(4)
                 .value()
         );
-        graph.draw();
+        chart.init();
     },
 
     reload: function () {

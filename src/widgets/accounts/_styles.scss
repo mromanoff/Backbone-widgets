@@ -27,8 +27,8 @@ $block: 'account';
   }
 
   &__chart {
-    height: 14px;
-    background-color: rgb(189, 140, 160);
+    //height: 14px;
+    //background-color: rgb(189, 140, 160);
   }
 
   &--grid-view {
@@ -38,6 +38,7 @@ $block: 'account';
     float: left;
     width: 24%;
     margin: 0 1% 1% 0;
+    text-align: center;
 
     &:nth-child(4n+5) {
       clear: both;
@@ -69,7 +70,7 @@ $block: 'account';
       }
 
       .value {
-        font-size: 30px;
+        font-size: 22px;
         padding: 10px;
         margin-bottom: 30px;
       }
@@ -82,59 +83,34 @@ $block: 'account';
     height: 60px;
     line-height: 60px;
     border-bottom: 1px solid #e7e7e7;
+    @include clearfix();
 
     .#{$block}__title {
-      font-size: 18px;
+      font-size: 16px;
       padding-left: 10px;
-      width: 40%;
-      display: inline-block;
+      width: 30%;
+      float: left;
     }
 
     .#{$block}__chart {
-      display: inline-block;
-      width: 16%;
+      float: left;
+      width: 40%;
+      height: 20px;
+      margin-top: 30px;
     }
 
     .#{$block}__allocation {
       float: right;
-      width: 40%;
+      width: 26%;
       height: 60px;
       text-align: right;
       .value {
-        font-size: 26px;
+        font-size: 22px;
         padding: 0 10px;
       }
+      .percentage {
+        color: #666666;
+      }
     }
-
   }
-
 }
-
-// list view
-//.list-view {
-//
-//  .account {
-//    width: 100%;
-//    height: 60px;
-//    line-height: 60px;
-//    border-bottom: 1px solid #e7e7e7;
-//
-//    .title {
-//      font-size: 18px;
-//      padding-left: 10px;
-//      width: 40%;
-//      display: inline-block;
-//    }
-//
-//    .allocation {
-//      float: right;
-//      width: 40%;
-//      height: 60px;
-//      text-align: right;
-//    }
-//
-
-//
-//  }
-
-//}

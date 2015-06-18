@@ -8,7 +8,7 @@ var HorizontalBarGraph = function (el, series) {
     this.series = series;
 };
 
-HorizontalBarGraph.prototype.draw = function () {
+HorizontalBarGraph.prototype.init = function () {
     var x = d3.scale.linear()
         .domain([0, d3.max(this.series, function (d) {
             return d.value;

@@ -30,20 +30,6 @@ module.exports = API;
 },{}],3:[function(require,module,exports){
 'use strict';
 
-var Collection = require('core/collection');
-var Model = require('./model');
-var API = require('config/api');
-var _ = require('underscore');
-
-module.exports = Collection.extend({
-    model: Model,
-    url: API.charts
-});
-
-
-},{"./model":5,"config/api":2,"core/collection":"core/collection","underscore":"underscore"}],4:[function(require,module,exports){
-'use strict';
-
 var d3 = require('d3');
 
 
@@ -52,7 +38,7 @@ var HorizontalBarGraph = function (el, series) {
     this.series = series;
 };
 
-HorizontalBarGraph.prototype.draw = function () {
+HorizontalBarGraph.prototype.init = function () {
     var x = d3.scale.linear()
         .domain([0, d3.max(this.series, function (d) {
             return d.value;
@@ -91,7 +77,20 @@ HorizontalBarGraph.prototype.draw = function () {
 module.exports = HorizontalBarGraph;
 
 
-},{"d3":"d3"}],5:[function(require,module,exports){
+},{"d3":"d3"}],4:[function(require,module,exports){
+'use strict';
+
+var Collection = require('core/collection');
+var Model = require('./model');
+var API = require('config/api');
+
+module.exports = Collection.extend({
+    model: Model,
+    url: API.charts
+});
+
+
+},{"./model":5,"config/api":2,"core/collection":"core/collection"}],5:[function(require,module,exports){
 'use strict';
 
 var Model = require('core/model');
@@ -138,11 +137,11 @@ module.exports = Module.extend({
     }
 });
 
-},{"./collection":3,"./view":8,"core/module":"core/module"}],7:[function(require,module,exports){
+},{"./collection":4,"./view":8,"core/module":"core/module"}],7:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    return "<section>\n    <h3>Sample Chart</h3>\n    <button class=\"btn btn-primary\">refresh data</button>\n    <div class=\"horizontal-bar-graph\" id=\"graph\"></div>\n</section>";
+    return "<section>\n    <h3>Sample Chart</h3>\n    <button class=\"btn btn-primary\">refresh data</button>\n    <div class=\"horizontal-bar-graph\"></div>\n</section>";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],8:[function(require,module,exports){
@@ -152,7 +151,7 @@ var ItemView = require('core/item-view');
 var template = require('./template.hbs');
 var _ = require('underscore');
 
-var Graph = require('./graph');
+var Chart = require('./chart');
 
 module.exports = ItemView.extend({
     template: template,
@@ -162,13 +161,13 @@ module.exports = ItemView.extend({
     },
 
     onRender: function () {
-        var graph = new Graph(
-            this.el.querySelector('#graph'),
+        var chart = new Chart(
+            this.el.querySelector('.horizontal-bar-graph'),
             _.chain(this.collection.toJSON())
                 .sample(4)
                 .value()
         );
-        graph.draw();
+        chart.init();
     },
 
     reload: function () {
@@ -176,7 +175,7 @@ module.exports = ItemView.extend({
     }
 });
 
-},{"./graph":4,"./template.hbs":7,"core/item-view":"core/item-view","underscore":"underscore"}],9:[function(require,module,exports){
+},{"./chart":3,"./template.hbs":7,"core/item-view":"core/item-view","underscore":"underscore"}],9:[function(require,module,exports){
 'use strict';
 
 var Application = require('core/application');

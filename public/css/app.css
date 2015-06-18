@@ -4872,16 +4872,14 @@ button.close {
 
 .account__title {
   color: dodgerblue; }
-.account__chart {
-  height: 14px;
-  background-color: #bd8ca0; }
 .account--grid-view {
   background-color: #f8f8f8;
   border: 1px solid #e7e7e7;
   display: block;
   float: left;
   width: 24%;
-  margin: 0 1% 1% 0; }
+  margin: 0 1% 1% 0;
+  text-align: center; }
   .account--grid-view:nth-child(4n+5) {
     clear: both; }
   .account--grid-view:nth-child(4n) {
@@ -4901,7 +4899,7 @@ button.close {
       padding: 10px 10px 0;
       display: block; }
     .account--grid-view .account__allocation .value {
-      font-size: 30px;
+      font-size: 22px;
       padding: 10px;
       margin-bottom: 30px; }
 .account--list-view {
@@ -4909,22 +4907,31 @@ button.close {
   height: 60px;
   line-height: 60px;
   border-bottom: 1px solid #e7e7e7; }
+  .account--list-view:before, .account--list-view:after {
+    content: " ";
+    display: table; }
+  .account--list-view:after {
+    clear: both; }
   .account--list-view .account__title {
-    font-size: 18px;
+    font-size: 16px;
     padding-left: 10px;
-    width: 40%;
-    display: inline-block; }
+    width: 30%;
+    float: left; }
   .account--list-view .account__chart {
-    display: inline-block;
-    width: 16%; }
+    float: left;
+    width: 40%;
+    height: 20px;
+    margin-top: 30px; }
   .account--list-view .account__allocation {
     float: right;
-    width: 40%;
+    width: 26%;
     height: 60px;
     text-align: right; }
     .account--list-view .account__allocation .value {
-      font-size: 26px;
+      font-size: 22px;
       padding: 0 10px; }
+    .account--list-view .account__allocation .percentage {
+      color: #666666; }
 
 .persona__content section > div {
   margin-left: -15px;

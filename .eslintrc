@@ -32,7 +32,7 @@
     "space-after-keywords": [2, "always"],
     "space-in-brackets": [2, "never"],
     "space-unary-ops": 2,
-    "no-underscore-dangle": 1,
+    "no-underscore-dangle": 0,
 
     "backbone/model-defaults": 1,
     "backbone/defaults-on-top": 1,

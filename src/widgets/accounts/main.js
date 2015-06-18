@@ -1,6 +1,6 @@
 'use strict';
 
-var version = '__VERSION__';
+//var version = '__VERSION__';
 
 var Backbone = require('backbone');
 Backbone.$ = require('jquery');

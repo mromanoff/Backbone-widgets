@@ -40,8 +40,7 @@ gulp.task('watch', ['build'], function () {
     gulp.watch(paths.styles, ['styles']);
 });
 
-
-gulp.task('tdd', function() {
+gulp.task('tdd', function () {
     return karma.start({
         configFile: __dirname + '/karma.conf.js',
         singleRun: false
@@ -56,8 +55,8 @@ gulp.task('test', function () {
 });
 
 gulp.task('build', [
-    'clean',
-     'styles',
+    //'clean',
+    'styles',
     'fonts'
 ]);
 
