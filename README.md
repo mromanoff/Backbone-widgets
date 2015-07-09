@@ -11,6 +11,7 @@
 * Backbone.js
 * Marionette.js
 * Handlebars
+* D3.js
 * Sass
 * Karma runner
 * Jasmine Unit test
