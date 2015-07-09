@@ -12,8 +12,6 @@ var Chart = function (el, series) {
 
 Chart.prototype = {
     init: function () {
-        console.info(this.el, this.series);
-
         this.renderChart();
     },
 

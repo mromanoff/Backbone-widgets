@@ -9130,6 +9130,12 @@ module.exports = Marionette.Application.extend({
     }
 });
 
+},{"backbone.marionette":"backbone.marionette"}],"core/collection-view":[function(require,module,exports){
+'use strict';
+
+var Marionette = require('backbone.marionette');
+
+module.exports = Marionette.CollectionView;
 },{"backbone.marionette":"backbone.marionette"}],"core/collection":[function(require,module,exports){
 'use strict';
 

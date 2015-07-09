@@ -3,7 +3,8 @@
 var API = {
     accounts: '/api/accounts',
     persona: '/api/persona',
-    charts: '/api/charts'
+    charts: '/api/charts',
+    balance: '/api/balance'
 };
 
 module.exports = API;

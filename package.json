@@ -67,6 +67,7 @@
     "core/application": "./src/common/core/application.js",
     "core/collection": "./src/common/core/collection.js",
     "core/item-view": "./src/common/core/item-view.js",
+    "core/collection-view": "./src/common/core/collection-view.js",
     "core/composite-view": "./src/common/core/composite-view.js",
     "core/layout-view": "./src/common/core/layout-view.js",
     "core/model": "./src/common/core/model.js",

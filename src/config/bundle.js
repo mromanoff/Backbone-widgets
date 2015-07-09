@@ -2,12 +2,12 @@
 
 var vendor = [
     'jquery',
+    'bootstrap',
     'underscore',
     'backbone',
     'backbone.marionette',
     'backbone.radio',
     'hbsfy/runtime',
-    'bootstrap',
     'd3'
 ];
 
@@ -16,6 +16,7 @@ var common = [
     'core/module',
     'core/item-view',
     'core/layout-view',
+    'core/collection-view',
     'core/composite-view',
     'core/model',
     'core/collection'
@@ -32,4 +33,8 @@ var templates = [
     'templates/partials'
 ];
 
-exports.core = [].concat(vendor, common, helpers, templates);
+var bootstrap = [
+    //'bootstrap.collapse'
+];
+
+exports.core = [].concat(vendor, bootstrap, common, helpers, templates);

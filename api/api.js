@@ -9,5 +9,6 @@ api.use(bodyParser.json());
 require('./accounts/routes')(api);
 require('./persona/routes')(api);
 require('./chart/routes')(api);
+require('./balance/routes')(api);
 
 module.exports = api;
