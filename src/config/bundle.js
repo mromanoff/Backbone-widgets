@@ -8,7 +8,8 @@ var vendor = [
     'backbone.marionette',
     'backbone.radio',
     'hbsfy/runtime',
-    'd3'
+    'd3',
+    'd3-tip'
 ];
 
 var common = [

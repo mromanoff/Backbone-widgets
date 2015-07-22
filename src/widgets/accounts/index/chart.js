@@ -1,6 +1,14 @@
 'use strict';
 
 var d3 = require('d3');
+var d3tip = require('d3-tip');
+d3tip(d3);
+
+var tip = d3.tip()
+        .attr('class', 'd3-tip')
+        .html(function(d) {
+            return '<div>' + d.title + '</div><div>' + d.value + '</div>' ;
+        });
 
 var Chart = function (el, series) {
     this.el = el;
@@ -46,6 +54,8 @@ Chart.prototype = {
             .attr('preserveAspectRatio', 'xMinYMid meet')
             .attr('viewBox', '0 0 600 100');
 
+        svg.call(tip);
+
         svg.selectAll('rect')
             .data(this.series)
             .enter()
@@ -70,7 +80,9 @@ Chart.prototype = {
                 fill: function (d) {
                     return d.color;
                 }
-            });
+            })
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
     }
 };
 
