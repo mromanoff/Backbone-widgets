@@ -13,7 +13,7 @@ module.exports = ItemView.extend({
         'click button': 'reload'
     },
 
-    onRender: function () {
+    onDomRefresh: function () {
         var chart = new Chart(
             this.el.querySelector('.horizontal-bar-graph'),
             _.chain(this.collection.toJSON())

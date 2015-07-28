@@ -44,6 +44,7 @@ d3tip(d3);
 
 var tip = d3.tip()
         .attr('class', 'd3-tip')
+        .offset([-10, 0])
         .html(function(d) {
             return '<div>' + d.title + '</div><div>' + d.value + '</div>' ;
         });
@@ -120,7 +121,7 @@ Chart.prototype = {
                 }
             })
             .on('mouseover', tip.show)
-            .on('mouseout', tip.hide);
+            //.on('mouseout', tip.hide);
     }
 };
 
