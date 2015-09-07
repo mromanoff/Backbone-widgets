@@ -5049,6 +5049,8 @@ button.close {
 .horizontal-bar-graph-segment:last-child .horizontal-bar-graph-value {
   padding-bottom: 11px; }
 
+.markets .list-group-item {
+  cursor: pointer; }
 .markets .list {
   margin: 20px 0; }
   .markets .list .index, .markets .list .value, .markets .list .change {
@@ -5066,5 +5068,3 @@ button.close {
   fill: none;
   stroke: #666;
   shape-rendering: crispEdges; }
-.markets .area {
-  fill: #4ca3bd; }

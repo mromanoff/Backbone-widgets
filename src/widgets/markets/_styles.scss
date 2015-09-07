@@ -1,6 +1,9 @@
 .markets {
 
-
+  .list-group-item {
+    cursor: pointer;
+  }
+  
   .list {
     margin: 20px 0;
     .index,
@@ -33,7 +36,7 @@
     shape-rendering: crispEdges;
   }
 
-  .area { fill: #4ca3bd; }
+  //.area { fill: #4ca3bd; }
 
 
 
