@@ -9,7 +9,8 @@ router.get('/', function (req, res) {
         script1: 'widget1',
         script2: 'widget2',
         script3: 'widget3',
-        script4: 'widget4'
+        script4: 'widget4',
+        script5: 'widget5'
     });
 });
 

@@ -10,6 +10,7 @@ require('./accounts/routes')(api);
 require('./persona/routes')(api);
 require('./chart/routes')(api);
 require('./balance/routes')(api);
+require('./markets/routes')(api);
 require('./site-navigation/routes')(api);
 
 module.exports = api;

@@ -1,0 +1,44 @@
+.markets {
+
+
+  .list {
+    margin: 20px 0;
+    .index,
+    .value,
+    .change {
+      display: inline-block;
+    }
+
+    .index {
+      width: 40%;
+    }
+
+    .value, .change{
+      width: 25%;
+      text-align: right;
+    }
+  }
+
+
+
+  svg { border: 1px solid #dedede; }
+
+  .axis {
+    font-size: 8px;
+  }
+
+  .axis path, .axis line {
+    fill: none;
+    stroke: #666;
+    shape-rendering: crispEdges;
+  }
+
+  .area { fill: #4ca3bd; }
+
+
+
+
+}
+
+
+

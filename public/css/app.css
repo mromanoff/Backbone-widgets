@@ -5048,3 +5048,23 @@ button.close {
 
 .horizontal-bar-graph-segment:last-child .horizontal-bar-graph-value {
   padding-bottom: 11px; }
+
+.markets .list {
+  margin: 20px 0; }
+  .markets .list .index, .markets .list .value, .markets .list .change {
+    display: inline-block; }
+  .markets .list .index {
+    width: 40%; }
+  .markets .list .value, .markets .list .change {
+    width: 25%;
+    text-align: right; }
+.markets svg {
+  border: 1px solid #dedede; }
+.markets .axis {
+  font-size: 8px; }
+.markets .axis path, .markets .axis line {
+  fill: none;
+  stroke: #666;
+  shape-rendering: crispEdges; }
+.markets .area {
+  fill: #4ca3bd; }
