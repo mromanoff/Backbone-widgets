@@ -48,11 +48,13 @@ module.exports = Collection.extend({
 // hbsfy compiled Handlebars template
 var HandlebarsCompiler = require('hbsfy/runtime');
 module.exports = HandlebarsCompiler.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-    var helper;
+    var helper, alias1=helpers.helperMissing, alias2="function", alias3=this.escapeExpression;
 
   return "<h2>"
-    + this.escapeExpression(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
-    + "</h2>\n<span><a href=\"#\">view all</a></span>\n\n<div class=\"dropdown dropdown pull-right\">\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\n        button label\n        <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\"></ul>\n</div>";
+    + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
+    + "</h2>\n<span><a href=\"#\">view all</a></span>\n\n<div class=\"dropdown dropdown pull-right\">\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\">\n        "
+    + alias3(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias1),(typeof helper === alias2 ? helper.call(depth0,{"name":"name","hash":{},"data":data}) : helper)))
+    + "\n        <span class=\"caret\"></span>\n    </button>\n    <ul class=\"dropdown-menu\"></ul>\n</div>";
 },"useData":true});
 
 },{"hbsfy/runtime":"hbsfy/runtime"}],5:[function(require,module,exports){
