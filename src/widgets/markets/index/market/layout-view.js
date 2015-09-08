@@ -15,18 +15,10 @@ module.exports = ItemView.extend({
     },
 
     initialize: function () {
-        this.listenTo(this.collection, 'active', this.rerenderViews);
-
-        this.listView = new ListView({
-            collection: this.collection
-        });
-
-        this.chartView = new ChartView({
-            model: this.collection.active
-        });
+        this.listenTo(this.collection, 'active', this.updateViews);
     },
 
-    rerenderViews: function () {
+    onBeforeShow: function () {
         this.listView = new ListView({
             collection: this.collection
         });
@@ -35,14 +27,16 @@ module.exports = ItemView.extend({
             collection: this.collection,
             model: this.collection.active
         });
+    },
 
+    onShow: function () {
         this.list.show(this.listView);
         this.chart.show(this.chartView);
     },
 
 
-    onAttach: function () {
-        this.list.show(this.listView);
-        this.chart.show(this.chartView);
+    updateViews: function () {
+        this.onBeforeShow();
+        this.onShow();
     }
 });

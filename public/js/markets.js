@@ -257,13 +257,13 @@ var Chart = require('./chart');
 module.exports = ItemView.extend({
     template: template,
 
-    initialize: function () {
+    onBeforeShow: function () {
         this.series = this.model.collection.active.toJSON().data;
+        this.chart = new Chart(this.el.querySelector('.chart'), this.series);
     },
 
-    onAttach: function () {
-        var chart = new Chart(this.el.querySelector('.chart'), this.series);
-        chart.init();
+    onShow: function () {
+        this.chart.init();
     }
 });
 
@@ -295,18 +295,10 @@ module.exports = ItemView.extend({
     },
 
     initialize: function () {
-        this.listenTo(this.collection, 'active', this.rerenderViews);
-
-        this.listView = new ListView({
-            collection: this.collection
-        });
-
-        this.chartView = new ChartView({
-            model: this.collection.active
-        });
+        this.listenTo(this.collection, 'active', this.updateViews);
     },
 
-    rerenderViews: function () {
+    onBeforeShow: function () {
         this.listView = new ListView({
             collection: this.collection
         });
@@ -315,15 +307,17 @@ module.exports = ItemView.extend({
             collection: this.collection,
             model: this.collection.active
         });
+    },
 
+    onShow: function () {
         this.list.show(this.listView);
         this.chart.show(this.chartView);
     },
 
 
-    onAttach: function () {
-        this.list.show(this.listView);
-        this.chart.show(this.chartView);
+    updateViews: function () {
+        this.onBeforeShow();
+        this.onShow();
     }
 });
 
@@ -344,11 +338,7 @@ var ItemView = require('./item-view');
 module.exports = CompositeView.extend({
     template: template,
     childView: ItemView,
-    childViewContainer: '.list-group',
-
-    initialize: function () {
-        //this.listenTo(this.collection, 'active', this.render);
-    }
+    childViewContainer: '.list-group'
 });
 
 },{"./composite-template.hbs":17,"./item-view":20,"core/composite-view":"core/composite-view"}],19:[function(require,module,exports){

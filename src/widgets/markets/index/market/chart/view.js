@@ -8,13 +8,13 @@ var Chart = require('./chart');
 module.exports = ItemView.extend({
     template: template,
 
-    initialize: function () {
+    onBeforeShow: function () {
         this.series = this.model.collection.active.toJSON().data;
+        this.chart = new Chart(this.el.querySelector('.chart'), this.series);
     },
 
-    onAttach: function () {
-        var chart = new Chart(this.el.querySelector('.chart'), this.series);
-        chart.init();
+    onShow: function () {
+        this.chart.init();
     }
 });
 

@@ -7,9 +7,5 @@ var ItemView = require('./item-view');
 module.exports = CompositeView.extend({
     template: template,
     childView: ItemView,
-    childViewContainer: '.list-group',
-
-    initialize: function () {
-        //this.listenTo(this.collection, 'active', this.render);
-    }
+    childViewContainer: '.list-group'
 });
